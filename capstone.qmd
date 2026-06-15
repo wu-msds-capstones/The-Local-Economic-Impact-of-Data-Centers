@@ -1,0 +1,22 @@
+---
+title: "Capstone Project"
+subtitle: Subtitle
+authors:
+  - Bob
+  - Jane
+bibliography: references.bib
+title-block-banner: true
+format: 
+  html:
+    theme:
+      light: lightly
+      dark: darkly
+---
+
+{{< include _01_intro.qmd >}}
+{{< include _02_background.qmd >}}
+{{< include _03_data.qmd >}}
+{{< include _04_analysis.qmd >}}
+{{< include _05_results.qmd >}}
+{{< include _06_conclusions.qmd >}}
+{{< include _07_references.qmd >}}
