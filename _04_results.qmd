@@ -390,7 +390,7 @@ with open(geojson_path, "r") as f:
 ```
 
 ```{python}
-#| label: cluster-map
+#| label: fig-cluster-map
 #| fig-cap: "Map of U.S. counties grouped into two clusters based on non-treatment county characteristics, illustrating the rural-urban split used in subsequent analysis."
 combined_df = pd.concat(
     [
@@ -501,7 +501,7 @@ Table: Estimated Difference-in-Differences effects of data center presence on co
 
 
 ```{python}
-#| label: diff-in-diff-examples
+#| label: fig-diff-in-diff-examples
 #| fig-cap: "Event-study estimates of data center impacts on local outcomes."
 fig, axes = plt.subplots(3, 2, figsize=(10, 7), sharex=True)
 axes = axes.reshape(3, 2)
