@@ -506,13 +506,15 @@ Table: Estimated Difference-in-Differences effects of data center presence on co
 #| fig-width: 12
 #| fig-height: 9
 #| out-width: 100%
-fig, axes = plt.subplots(3, 2, figsize=(12, 9), sharex=True, constrained_layout=True)
+fig, axes = plt.subplots(3, 2, figsize=(12, 9), sharex=True)
 axes = axes.reshape(3, 2)
 
 cluster_colors = {0: "#C67A6D", 1: "#5B8FA8"}
 
+fig.subplots_adjust(top=0.90)
+
 fig.text(0.28, 0.98, "Cluster 0 (More Rural)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[0])
-fig.text(0.78, 0.98, "Cluster 1 (More Urban)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[1])
+fig.text(0.72, 0.98, "Cluster 1 (More Urban)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[1])
 
 outcomes = [
     ("personal_income_thousands_of_dollars_per_capita_log", "Log Personal Income", "first_dc_year"),
@@ -570,7 +572,7 @@ for row, (outcome, clean_name, first_treat) in enumerate(outcomes):
         if row == 2:
             ax.set_xlabel("Relative Year")
 
-        ax.set_title(f"{clean_name} ({'Nearby Datacenters' if first_treat == 'above_val_nearby_year' else 'In-County Datacenters'})", fontsize = 10)
+        ax.set_title(f"{clean_name} ({'Nearby Datacenters' if first_treat == 'above_val_nearby_year' else 'In-County Datacenters'})", fontsize = 14)
 
 plt.show()
 ```
