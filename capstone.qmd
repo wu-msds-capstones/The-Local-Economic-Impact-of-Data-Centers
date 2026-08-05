@@ -1,9 +1,9 @@
 ---
-title: "Capstone Project"
-subtitle: Subtitle
+title: "The-Local-Economic-Impact-of-Data-Centers"
+subtitle: County-level measures in the contiguous United States
 authors:
-  - Bob
-  - Jane
+  - Ian Walsh
+  - Logan Rosell
 bibliography: references.bib
 title-block-banner: true
 format: 
