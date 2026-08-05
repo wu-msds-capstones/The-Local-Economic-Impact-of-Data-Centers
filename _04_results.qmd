@@ -66,6 +66,8 @@ county_df = con.execute("SELECT * FROM my_db.transformed.us_counties_spatial").d
 
 ## PCA & K-Means Clustering
 
+As mentioned in the Machine Learning Approach section, the PCA model was built only on population, total county land area, and total county water area, and had no access to data center measures. Despite this, the first two principal components smoothly separate the log-scaled data center count of each county. 
+
 ```{python}
 #| output: false
 # Do df cleaning
@@ -251,7 +253,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-
+With the PCA model fit, we use K-means clustering to separate the data into two groups. The resulting groups appear to separate rural from urban and suburban counties. @tbl-cluster-summary shows the mean characteristics of these groups for a small set of features. The @fig-cluster-map shows how these clusters are distributed across the contiguous United States.
 
 ::: {#tbl-cluster-summary}
 Table: Cluster-level summary statistics for county population, land area, unemployment, data center count, and log personal income.
@@ -473,7 +475,15 @@ for i in cols_to_use:
     fig.show()
 ```
 
+Both the map and table above illustrate how our models split counties into clusters by rural and urban characteristics. For example, Cluster 0 counties have, on average, a meaningfully lower population and personal income, whereas Cluster 1 counties are more populous and wealthier. On the map, the less densely populated center of the United States is dominated by Cluster 0, whereas major population hubs such as Los Angeles, Dallas, and Chicago fall within Cluster 1. 
+
+While the clusters seem to capture rural and urban differences, they also appear to pick up a significant difference in the number of average data centers between the two clusters. They do this despite never having “seen” any of the data center data, so it appears there is a meaningful relationship between data centers and the population and size characteristics that our PCA model was built on.
+
+
 ## Difference-in-Differences Regression
+
+The difference-in-differences regression model results are mixed. Each outcome variable is built on four different models: in-county data centers in Cluster 0, nearby data centers in Cluster 0, in-county data centers in Cluster 1, and nearby data centers in Cluster 1. Many of our models violated the parallel trends assumption, meaning that in the five years leading up to the treatment year, there is at least one year in which the difference between the treatment and control groups is not constant. Additionally, there are a number of models where the parallel trends assumption is met, but there is no statistically significant trend in the years after treatment. However, there are a number of models that find significant trends, which indicate a relationship between the presence of data centers and economic outcomes.
+
 
 Table: Estimated Difference-in-Differences effects of data center presence on county economic and environmental outcomes, by cluster and treatment type, 5 years after crossing the specified threshold. {#tbl-did-effects}
 
@@ -498,6 +508,8 @@ Table: Estimated Difference-in-Differences effects of data center presence on co
 <sup>2</sup> Model violates the parallel trends assumption.
 
 </div>
+
+@tbl-did-effects shows that a majority of the models run do not have a significant effect, but some models (particularly in Cluster 0) do have an effect. We find that for Cluster 0, getting three or more data centers is associated with a decrease in per-capita trade & transport employment, industrial employment, in-county and nearby air pollutants, and personal income. Additionally, for Cluster 0, getting 113 or more data centers in a 50-mile radius around the county is associated with an increase in single-family permits and a decrease in the unemployment rate. The only significant outcome for Cluster 1 is a decrease in primary industry employment when the 113 nearby data center threshold is crossed.
 
 
 ```{python}
@@ -577,7 +589,11 @@ for row, (outcome, clean_name, first_treat) in enumerate(outcomes):
 plt.show()
 ```
 
+@fig-diff-in-diff-examples displays the more apparent trends found in our models. It shows that data center additions in a county affect log personal income and PM2.5 levels over time; it also shows that the addition of nearby data centers affects unemployment over time. Results are statistically significant in Cluster 0, while Cluster 1 shows no significant effects.
+
 ## Variational Autoencoder
+
+The variational autoencoder neural network that we trained did not produce meaningfully interpretable results. While increasing the data center tier in the latent space for an existing county-year profile did alter the other predicted features, the outputs should be interpreted cautiously rather than as reliable counterfactual estimates.
 
 Table: Top predicted changes from the VAE counterfactual for Cluster 0 counties after a +2 data center tier shift. {#tbl-vae-cluster0}
 
@@ -638,3 +654,5 @@ Table: Top predicted changes from the VAE counterfactual for Cluster 1 counties 
 | employed_spatial_weighted_avg_5_log | 0.258 |
 | nearby_datacenters_50mi_per_100_sqmi | 0.251 |
 | annual_payroll_information_spatial_weighted_avg_5_per_capita_log1p | 0.240 |
+
+As is evident in the table above, the model shifted nearly all output features in a positive direction. This is likely because the decoder learned a broad conditional shift associated with higher data center tiers, rather than a feature-specific response. Since the model was not constrained to preserve economic relationships (e.g., consistency between unemployment and sectoral employment), it appears to have captured a generalized upward movement in the feature space instead of a meaningful causal pattern.
