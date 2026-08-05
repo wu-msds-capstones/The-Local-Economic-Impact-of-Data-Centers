@@ -1,0 +1,30 @@
+# Run: "pip install -r requirements.txt" in the terminal from within the repo directory
+
+pandas
+numpy
+sqlalchemy
+duckdb
+haversine
+geopandas
+
+# Modeling, Machine Learning & Statistics
+scikit-learn
+scipy
+statsmodels
+imbalanced-learn
+linearmodels
+pyfixest
+diff_diff
+
+# Visualization & EDA
+matplotlib
+seaborn
+plotly
+skimpy
+kaleido
+
+# Environment & Configuration
+python-dotenv
+
+# Local packages
+-e .
