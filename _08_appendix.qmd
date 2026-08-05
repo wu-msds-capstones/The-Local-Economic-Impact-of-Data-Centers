@@ -1,6 +1,6 @@
 # Appendix
 
-Table A.1: Data sources used in the analysis. {#tbl-appendix-data-sources}
+Table A.1: Data sources used in the analysis.
 
 | Source Name | Specific Dataset Name | Purpose | Link |
 |---|---|---|---|

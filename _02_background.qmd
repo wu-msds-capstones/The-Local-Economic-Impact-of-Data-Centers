@@ -5,8 +5,8 @@
 ## Database Design
 
 ```{mermaid}
-#| label: fig-erd-schema
-#| fig-cap: "Entity-relationship diagram of county-level source tables used in the analysis."
+%%| label: fig-erd-schema
+%%| fig-cap: "Entity-relationship diagram of county-level source tables used in the analysis."
 
 erDiagram
     us_counties {
@@ -107,7 +107,7 @@ erDiagram
         int est_gt_5000
     }
 
-    nails_code_look_up {
+    naics_code_look_up {
         string sector PK
         string definition
     }
@@ -122,7 +122,7 @@ erDiagram
         float distance_miles
     }
 
-    nails_518_nearby_estabs_50mi {
+    naics_518_nearby_estabs_50mi {
         int year PK
         int county_id PK, FK
         float nearby_estabs_50mi_landadj
@@ -141,7 +141,6 @@ erDiagram
     us_counties ||--o{ res_construction_permits : ""
     us_counties ||--o{ naics_518_establishments : ""
     us_counties ||--o{ business_patterns : ""
-    us_counties ||--o{ county_distances_lookup : ""
     us_counties ||--o{ county_distances_lookup : ""
     us_counties ||--o{ nails_518_nearby_estabs_50mi : ""
     nails_code_look_up ||--o{ business_patterns : ""

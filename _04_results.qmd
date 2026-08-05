@@ -503,7 +503,10 @@ Table: Estimated Difference-in-Differences effects of data center presence on co
 ```{python}
 #| label: fig-diff-in-diff-examples
 #| fig-cap: "Event-study estimates of data center impacts on local outcomes."
-fig, axes = plt.subplots(3, 2, figsize=(10, 7), sharex=True)
+#| fig-width: 12
+#| fig-height: 9
+#| out-width: 100%
+fig, axes = plt.subplots(3, 2, figsize=(12, 9), sharex=True, constrained_layout=True)
 axes = axes.reshape(3, 2)
 
 cluster_colors = {0: "#C67A6D", 1: "#5B8FA8"}
@@ -567,9 +570,7 @@ for row, (outcome, clean_name, first_treat) in enumerate(outcomes):
         if row == 2:
             ax.set_xlabel("Relative Year")
 
-        ax.set_title(f"{clean_name} ({'Nearby Datacenters' if first_treat == 'above_val_nearby_year' else 'In-County Datacenters'})")
-
-plt.tight_layout(rect=[0, 0, 1, 0.95])
+        ax.set_title(f"{clean_name} ({'Nearby Datacenters' if first_treat == 'above_val_nearby_year' else 'In-County Datacenters'})", fontsize = 10)
 
 plt.show()
 ```
