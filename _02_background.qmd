@@ -1,1 +1,155 @@
 # Background
+
+## Data Sourcing & Organization
+
+## Database Design
+
+```{mermaid}
+%%| label: fig-erd-schema
+%%| fig-cap: "Entity-relationship diagram of county-level source tables used in the analysis."
+%%| fig-width: 18
+%%| fig-height: 24
+%%| out-width: 100%
+%%| mermaid-format: svg
+
+erDiagram
+    us_counties {
+        int county_id PK
+        string county_name
+        string state
+        string state_fips_code
+        string county_fips_code
+        string county_ns_code
+        string fips_class_code
+        string functional_status
+        float centroid_lat
+        float centroid_lon
+        float land_area_sqmi
+        float water_area_sqmi
+    }
+
+    population {
+        int year PK
+        int county_id PK, FK
+        int population
+    }
+
+    personal_income {
+        int year PK
+        int county_id PK, FK
+        string industry_classification
+        float per_capita_personal_income_dollars
+        float personal_income_thousands_of_dollars
+    }
+
+    gdp {
+        int year PK
+        int county_id PK, FK
+        float real_gdp_2017_dollars_thousands
+        float current_gdp_dollars_thousands
+        float quantity_index_gdp
+    }
+
+    res_construction_permits {
+        int year PK
+        int county_id PK, FK
+        int all_permits
+        int single_family_permits
+        int all_multifamily_permits
+        int multifamily_permits_2_units
+        int multifamily_permits_3_4_units
+        int multifamily_permits_5_or_more_units
+    }
+
+    unemployment {
+        int year PK
+        int county_id PK, FK
+        int civilian_labor_force
+        int employed
+        int unemployed
+        float unemployment_rate
+    }
+
+    air_quality {
+        int year PK
+        int county_id PK, FK
+        float pm25_max_sd
+        float pm25_med_sd
+        float pm25_mean_sd
+        float pm25_pop_sd
+        float pm25_max_daily_avg
+        float pm25_med_daily_avg
+        float pm25_mean_daily_avg
+        float pm25_pop_daily_avg
+    }
+
+    naics_518_establishments {
+        int county_id PK
+        int year
+        int estabs
+    }
+
+    business_patterns {
+        int year PK
+        string naics_industry_code PK
+        int county_id PK, FK
+        int tot_employee_count
+        float annual_payroll
+        int tot_establishment_count
+        int est_lt_5
+        int est5_9
+        int est10_19
+        int est20_49
+        int est50_99
+        int est100_249
+        int est250_499
+        int est500_999
+        int est_gt_1000
+        int est1000_1500
+        int est1500_2500
+        int est2500_5000
+        int est_gt_5000
+    }
+
+    naics_code_look_up {
+        string sector PK
+        string definition
+    }
+
+    county_distances_lookup {
+        int county_id_2 PK, FK
+        int county_id PK, FK
+        float centroid_lon
+        float centroid_lat
+        float centroid_lon_2
+        float centroid_long_2
+        float distance_miles
+    }
+
+    naics_518_nearby_estabs_50mi {
+        int year PK
+        int county_id PK, FK
+        float nearby_estabs_50mi_landadj
+        int contributing_counties_50mi
+        float raw_overlap_sqmi_50mi
+        float effective_land_overlap_sqmi_50mi
+        float nearby_estabs_50mi_per_sqmi
+        float nearby_estabs_50mi_per_100_sqmi
+    }
+
+    us_counties ||--o{ air_quality : ""
+    us_counties ||--o{ population : ""
+    us_counties ||--o{ personal_income : ""
+    us_counties ||--o{ gdp : ""
+    us_counties ||--o{ unemployment : ""
+    us_counties ||--o{ res_construction_permits : ""
+    us_counties ||--o{ naics_518_establishments : ""
+    us_counties ||--o{ business_patterns : ""
+    us_counties ||--o{ county_distances_lookup : ""
+    us_counties ||--o{ naics_518_nearby_estabs_50mi : ""
+    naics_code_look_up ||--o{ business_patterns : ""
+```
+
+## Data Cleaning
+
+## Managing Missingness

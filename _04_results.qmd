@@ -64,6 +64,8 @@ emp_df = con.execute("SELECT * FROM my_db.transformed.unemployment").df()
 county_df = con.execute("SELECT * FROM my_db.transformed.us_counties_spatial").df()
 ```
 
+## PCA & K-Means Clustering
+
 ```{python}
 #| output: false
 # Do df cleaning
@@ -228,7 +230,6 @@ X_train = pca.fit_transform(X_train)
 X_test = pca.transform(X_test)
 ```
 
-
 ```{python}
 #| label: fig-pca-counties
 #| fig-cap: "Two-dimensional principal component projection of U.S. counties using the top two principal components of geographic and demographic features, with color indicating logged data center count."
@@ -263,3 +264,377 @@ Table: Cluster-level summary statistics for county population, land area, unempl
 | Data Center Count    | 1.348     | 10.411    |
 | Log Personal Income  | 3.630     | 3.709     |
 :::
+
+
+```{python}
+#| output: false
+n_clusters=2
+
+kmeans = KMeans(n_clusters, init='k-means++', max_iter=300, n_init=10, random_state=42)
+
+kmeans.fit(X_train)
+
+cluster_labels = kmeans.predict(X_train)
+
+train_clusters = kmeans.predict(X_train)
+test_clusters = kmeans.predict(X_test)
+
+kmeans_labled_df = final_df.copy()
+
+kmeans_labled_df.loc[y_train.index, 'cluster_label'] = train_clusters
+kmeans_labled_df.loc[y_test.index, 'cluster_label'] = test_clusters
+
+kmeans_labled_df['cluster_label'] = kmeans_labled_df['cluster_label'].astype(int)
+
+county_mode_cluster = (
+    kmeans_labled_df
+    .groupby('county_id')['cluster_label']
+    .agg(lambda x: x.mode().iloc[0])
+    .reset_index()
+    .rename(columns={'cluster_label': 'county_mode_cluster'})
+)
+
+kmeans_labled_df = kmeans_labled_df.merge(
+    county_mode_cluster,
+    on='county_id',
+    how='left'
+)
+
+kmeans_labled_df['cluster_label'] = kmeans_labled_df['county_mode_cluster'].astype(int)
+kmeans_labled_df = kmeans_labled_df.drop(columns=['county_mode_cluster'])
+
+first_treated = (
+    final_df[final_df["datacenters"] > 2]
+    .groupby("county_id")["year"]
+    .min()
+    .reset_index()
+    .rename(columns={"year": "first_dc_year"})
+)
+
+final_df = final_df.merge(first_treated, on="county_id", how="left")
+final_df["first_dc_year"] = final_df["first_dc_year"].fillna(0).astype(int)
+
+final_df["treated"] = (
+    (final_df["first_dc_year"] > 0)
+    & (final_df["year"] >= final_df["first_dc_year"])
+).astype(int)
+
+# Create relative time variable: t - first_dc_year (e.g., -2, -1, 0, 1, 2)
+# Set never-treated (first_dc_year == 0) relative time to -100
+final_df["rel_year"] = final_df.apply(
+    lambda x: x["year"] - x["first_dc_year"] if x["first_dc_year"] > 0 else -100,
+    axis=1,
+)
+
+final_df = final_df.merge(
+    kmeans_labled_df[["county_id", "year", "cluster_label"]],
+    on=["county_id", "year"],
+    how="left",
+)
+
+first_treated_nearby = (
+    final_df[final_df["nearby_datacenters_50mi"] > 112] # 73rd percentile
+    .groupby("county_id")["year"]
+    .min()
+    .reset_index()
+    .rename(columns={"year": "above_val_nearby_year"})
+)
+
+final_df = final_df.merge(first_treated_nearby, on="county_id", how="left")
+final_df["above_val_nearby_year"] = final_df["above_val_nearby_year"].fillna(0).astype(int)
+
+final_df["treated_nearby"] = (
+    (final_df["above_val_nearby_year"] > 0)
+    & (final_df["year"] >= final_df["above_val_nearby_year"])
+).astype(int)
+
+# Create relative time variable: t - first_dc_year (e.g., -2, -1, 0, 1, 2)
+# Set never-treated (first_dc_year == 0) relative time to -100
+final_df["rel_year_nearby"] = final_df.apply(
+    lambda x: x["year"] - x["above_val_nearby_year"] if x["above_val_nearby_year"] > 0 else -100,
+    axis=1,
+)
+
+cluster_0_df = final_df[final_df["cluster_label"] == 0]
+cluster_1_df = final_df[final_df["cluster_label"] == 1]
+
+c0_pop_log_mean = cluster_0_df["population_log"].mean().round(3)
+c1_pop_log_mean = cluster_1_df["population_log"].mean().round(3)
+print(f"cluster 0 logged population mean: {c0_pop_log_mean}")
+print(f"cluster 1 logged population mean: {c1_pop_log_mean}")
+
+c0_land_sqmi_log_mean = cluster_0_df["land_area_sqmi_log"].mean().round(3)
+c1_land_sqmi_log_mean = cluster_1_df["land_area_sqmi_log"].mean().round(3)
+print(f"cluster 0 logged land area mean: {c0_land_sqmi_log_mean}")
+print(f"cluster 1 logged land area mean: {c1_land_sqmi_log_mean}")
+
+c0_unemp_rate_mean = cluster_0_df["unemployment_rate_pct"].mean().round(3)
+c1_unemp_rate_mean = cluster_1_df["unemployment_rate_pct"].mean().round(3)
+print(f"cluster 0 unemployment rate mean: {c0_unemp_rate_mean}")
+print(f"cluster 1 unemployment rate mean: {c1_unemp_rate_mean}")
+
+c0_dc_count_mean = cluster_0_df["datacenters"].mean().round(3)
+c1__dc_count_mean = cluster_1_df["datacenters"].mean().round(3)
+print(f"cluster 0 data center count mean: {c0_dc_count_mean}")
+print(f"cluster 1 data center count mean: {c1__dc_count_mean}")
+
+c0_personal_income_log_mean = cluster_0_df["personal_income_thousands_of_dollars_per_capita_log"].mean().round(3)
+c1_personal_income_log_mean = cluster_1_df["personal_income_thousands_of_dollars_per_capita_log"].mean().round(3)
+print(f"cluster 0 personal income log mean: {c0_personal_income_log_mean}")
+print(f"cluster 1 personal income log mean: {c1_personal_income_log_mean}")
+
+geojson_path = data_dir / "county_fips_codes/geojson_counties_fips.json"
+
+with open(geojson_path, "r") as f:
+    counties_geojson = json.load(f)
+```
+
+```{python}
+#| label: fig-cluster-map
+#| fig-cap: "Map of U.S. counties grouped into two clusters based on non-treatment county characteristics, illustrating the rural-urban split used in subsequent analysis."
+combined_df = pd.concat(
+    [
+        cluster_0_df[["county_id"]].assign(cluster=0),
+        cluster_1_df[["county_id"]].assign(cluster=1),
+    ],
+    ignore_index=True,
+)
+
+eda_table_name = "Counties Colored By Cluster"
+cols_to_use = ["cluster"]
+
+cluster_labels = {
+    0: "0 (More Rural)",
+    1: "1 (More Urban)"
+}
+
+cluster_colors = {
+    "0 (More Rural)": "#C67A6D",
+    "1 (More Urban)": "#5B8FA8"
+}
+
+for i in cols_to_use:
+    value_col = i
+    map_df = combined_df[["county_id", value_col]].dropna().copy()
+
+    map_df["flag"] = map_df["cluster"].map(cluster_labels)
+
+    fig = px.choropleth(
+        map_df,
+        geojson=counties_geojson,
+        locations="county_id",
+        color="flag",
+        featureidkey="id",
+        color_discrete_map = cluster_colors,
+        category_orders={"flag": ["0 (More Rural)", "1 (More Urban)"]},
+        labels = {"flag": "Cluster"}
+    )
+
+    fig.update_traces(
+        marker_line_color="#F7F7F7",
+        marker_line_width=0.1
+    )
+    
+    fig.update_layout(
+        title=dict(
+            text=f"{eda_table_name}",
+            x=0.5,
+            xanchor="center",
+            y=0.98,
+            yanchor="top",
+            pad=dict(t=0, b=0),
+            font=dict(size=24)
+        ),
+        geo=dict(
+            scope="usa",
+            projection_type="albers usa",
+            showland=True,
+            landcolor="rgb(248, 248, 248)",
+            showcountries=False,
+            showlakes=False,
+            bgcolor="rgba(0,0,0,0)",
+            lonaxis=dict(range=[-125, -66]),
+            lataxis=dict(range=[24, 50])
+        ),
+        legend=dict(
+            title_text="",
+            x=0.98,
+            xanchor="right",
+            y=0.25,
+            yanchor="middle",
+            bgcolor="rgba(255,255,255,0.75)",
+            font=dict(size=18)
+        ),
+        margin=dict(l=0, r=0, t=0, b=0),
+        width=900,
+        height=450
+    )
+
+    fig.show()
+```
+
+## Difference-in-Differences Regression
+
+Table: Estimated Difference-in-Differences effects of data center presence on county economic and environmental outcomes, by cluster and treatment type, 5 years after crossing the specified threshold. {#tbl-did-effects}
+
+| Outcome | Cluster 0: In-County Data Centers (> 2) | Cluster 0: Nearby Data Centers (> 112) | Cluster 1: In-County Data Centers (> 2) | Cluster 1: Nearby Data Centers (> 112) |
+|---|---:|---:|---:|---:|
+| Trade & Transport Employment (% change per capita) | -0.337<br><span style="font-size: 0.85em;">(-0.579, -0.097)</span> | No Effect<sup>2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
+| Public Services Employment (% change per capita) | No Effect<sup>1</sup> | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> |
+| Professional Employment (% change per capita) | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
+| Primary Industry Employment (% change per capita) | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>2</sup> | -0.173<br><span style="font-size: 0.85em;">(-0.308, -0.038)</span> |
+| Information Employment (% change per capita) | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
+| Industrial Employment (% change per capita) | -0.759<br><span style="font-size: 0.85em;">(-1.097, -0.421)</span> | No Effect<sup>1</sup> | No Effect<sup>2</sup> | No Effect<sup>1</sup> |
+| Nearby mean daily PM2.5 | -0.398<br><span style="font-size: 0.85em;">(-0.662, -0.133)</span> | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>2</sup> |
+| In-County mean daily PM2.5 | -0.398<br><span style="font-size: 0.85em;">(-0.681, -0.115)</span> | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>2</sup> |
+| Real GDP (% change in $1000 2017 dollars per capita) | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
+| Single Family Permits (% change per 1,000 population) | No Effect<sup>1, 2</sup> | 14.992<br><span style="font-size: 0.85em;">(7.077, 22.907)</span> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> |
+| Personal Income (% change in $1000 per capita) | -3.793<br><span style="font-size: 0.85em;">(-5.480, -2.096)</span> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> |
+| Unemployment Rate (%) | No Effect<sup>1</sup> | -0.901<br><span style="font-size: 0.85em;">(-1.221, -0.581)</span> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> |
+
+<div class="table-notes">
+
+<sup>1</sup> Result is not statistically significant.  
+<sup>2</sup> Model violates the parallel trends assumption.
+
+</div>
+
+
+```{python}
+#| label: fig-diff-in-diff-examples
+#| fig-cap: "Event-study estimates of data center impacts on local outcomes."
+#| fig-width: 12
+#| fig-height: 9
+#| out-width: 100%
+fig, axes = plt.subplots(3, 2, figsize=(12, 9), sharex=True)
+axes = axes.reshape(3, 2)
+
+cluster_colors = {0: "#C67A6D", 1: "#5B8FA8"}
+
+fig.subplots_adjust(top=0.90)
+
+fig.text(0.28, 0.98, "Cluster 0 (More Rural)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[0])
+fig.text(0.72, 0.98, "Cluster 1 (More Urban)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[1])
+
+outcomes = [
+    ("personal_income_thousands_of_dollars_per_capita_log", "Log Personal Income", "first_dc_year"),
+    ("pm25_mean_daily_avg", "PM2.5 Mean Daily Avg", "first_dc_year"),
+    ("unemployment_rate_pct", "Unemployment Rate", "above_val_nearby_year")
+]
+
+for row, (outcome, clean_name, first_treat) in enumerate(outcomes):
+    row_results = []
+
+    for cluster, cluster_num in [(cluster_0_df, 0), (cluster_1_df, 1)]:
+        results, es_df = mlu.create_DiD_model(cluster, outcome, first_treat)
+        row_results.append((cluster_num, es_df.copy()))
+
+    y_min = min(es_df["ci_lower"].min() for _, es_df in row_results)
+    y_max = max(es_df["ci_upper"].max() for _, es_df in row_results)
+    y_pad = (y_max - y_min) * 0.08
+    y_min -= y_pad
+    y_max += y_pad
+
+    for col, (cluster_num, es_df) in enumerate(row_results):
+        ax = axes[row, col]
+        
+        ax.errorbar(
+            x=es_df.index,
+            y=es_df["effect"],
+            yerr=[es_df["effect"] - es_df["ci_lower"], es_df["ci_upper"] - es_df["effect"]],
+            fmt="o",
+            color=cluster_colors[cluster_num],
+            ecolor=cluster_colors[cluster_num],
+            capsize=3
+        )
+
+        ax.plot(
+            es_df.index, 
+            es_df["effect"], 
+            color=cluster_colors[cluster_num], 
+            linestyle="--", 
+            alpha=0.7
+            )
+
+        ax.axhline(0, color="black", linestyle="-", linewidth=1, alpha=0.7)
+        ax.axvline(0, color="#323638", linestyle=":", linewidth=1)
+        
+        ax.set_xticks(list(range(-5, 6)))
+        ax.set_xlim(-5.5, 5.5)
+
+        ax.set_ylim(y_min, y_max)
+
+        if col == 0:
+            ax.set_ylabel("Effect")
+        else:
+            ax.set_ylabel("")
+
+        if row == 2:
+            ax.set_xlabel("Relative Year")
+
+        ax.set_title(f"{clean_name} ({'Nearby Datacenters' if first_treat == 'above_val_nearby_year' else 'In-County Datacenters'})", fontsize = 14)
+
+plt.show()
+```
+
+## Variational Autoencoder
+
+Table: Top predicted changes from the VAE counterfactual for Cluster 0 counties after a +2 data center tier shift. {#tbl-vae-cluster0}
+
+| Feature | Predicted change |
+|---|---:|
+| per_capita_personal_income_dollars_spatial_weighted_avg_5 | 679.119 |
+| nearby_datacenters_50mi | 16.684 |
+| estabs_asinh | 4.775 |
+| centroid_lon | 2.013 |
+| centroid_lat | 1.233 |
+| datacenters_per_100_sqmi | 0.580 |
+| employed_log | 0.558 |
+| civilian_labor_force_log | 0.545 |
+| population_log | 0.540 |
+| unemployed_log | 0.493 |
+| current_gdp_dollars_thousands_log | 0.467 |
+| current_gdp_dollars_thousands_spatial_weighted_avg_5_log | 0.248 |
+| estabs_spatial_asinh | 0.245 |
+| employed_spatial_weighted_avg_5_log | 0.232 |
+| civilian_labor_force_spatial_weighted_avg_5_log | 0.224 |
+| unemployed_spatial_weighted_avg_5_log | 0.218 |
+| datacenters_spatial_weighted_avg_5_log1p | 0.194 |
+| single_family_permits_per_1000_log1p | 0.190 |
+| estabs_yoy_raw_diff | 0.188 |
+| annual_payroll_public_services_per_capita_log1p | 0.154 |
+| nearby_datacenters_50mi_per_100_sqmi | 0.127 |
+| annual_payroll_trade_transport_per_capita_log1p | 0.095 |
+| estabs_asinh_growth | 0.094 |
+| annual_payroll_industrial_per_capita_log1p | 0.087 |
+| annual_payroll_professional_per_capita_log1p | 0.078 |
+
+Table: Top predicted changes from the VAE counterfactual for Cluster 1 counties after a +2 data center tier shift. {#tbl-vae-cluster1}
+
+| Feature | Predicted change |
+|---|---:|
+| per_capita_personal_income_dollars_spatial_weighted_avg_5 | 935.954 |
+| nearby_datacenters_50mi | 38.650 |
+| centroid_lon | 1.707 |
+| estabs_asinh | 1.126 |
+| annual_payroll_public_services_spatial_weighted_avg_5_per_capita | 0.983 |
+| estabs_yoy_raw_diff | 0.760 |
+| unemployed_log | 0.482 |
+| civilian_labor_force_log | 0.476 |
+| employed_log | 0.469 |
+| current_gdp_dollars_thousands_log | 0.458 |
+| population_log | 0.456 |
+| multifamily_permits_5_or_more_units_log1p | 0.452 |
+| centroid_lat | 0.401 |
+| annual_payroll_trade_transport_spatial_weighted_avg_5_per_capita | 0.378 |
+| estabs_spatial_asinh | 0.375 |
+| datacenters_spatial_weighted_avg_5_log1p | 0.325 |
+| multifamily_permits_5_or_more_units_spatial_weighted_avg_5_log1p | 0.313 |
+| current_gdp_dollars_thousands_spatial_weighted_avg_5_log | 0.312 |
+| unemployed_spatial_weighted_avg_5_log | 0.303 |
+| unemployment_rate_spatial_weighted_avg_5 | 0.298 |
+| datacenters_per_100_sqmi | 0.286 |
+| civilian_labor_force_spatial_weighted_avg_5_log | 0.263 |
+| employed_spatial_weighted_avg_5_log | 0.258 |
+| nearby_datacenters_50mi_per_100_sqmi | 0.251 |
+| annual_payroll_information_spatial_weighted_avg_5_per_capita_log1p | 0.240 |
