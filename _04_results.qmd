@@ -474,3 +474,22 @@ for i in cols_to_use:
 ```
 
 ## Difference-in-Differences Regression
+
+Table: Estimated Difference-in-Differences effects of data center presence on county economic and environmental outcomes, by cluster and treatment type, 5 years after crossing the specified threshold. {#tbl-did-effects}
+
+| Outcome | Cluster 0: In-County Data Centers (> 2) | Cluster 0: Nearby Data Centers (> 112) | Cluster 1: In-County Data Centers (> 2) | Cluster 1: Nearby Data Centers (> 112) |
+|---|---:|---:|---:|---:|
+| Trade & Transport Employment (% change per capita) | -0.337<br><span style="font-size: 0.85em;">(-0.579, -0.097)</span> | No Effect<sup>2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
+| Public Services Employment (% change per capita) | No Effect<sup>1</sup> | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> |
+| Professional Employment (% change per capita) | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
+| Primary Industry Employment (% change per capita) | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>2</sup> | -0.173<br><span style="font-size: 0.85em;">(-0.308, -0.038)</span> |
+| Information Employment (% change per capita) | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
+| Industrial Employment (% change per capita) | -0.759<br><span style="font-size: 0.85em;">(-1.097, -0.421)</span> | No Effect<sup>1</sup> | No Effect<sup>2</sup> | No Effect<sup>1</sup> |
+| Nearby mean daily PM2.5 | -0.398<br><span style="font-size: 0.85em;">(-0.662, -0.133)</span> | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>2</sup> |
+| In-County mean daily PM2.5 | -0.398<br><span style="font-size: 0.85em;">(-0.681, -0.115)</span> | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>2</sup> |
+| Real GDP (% change in $1000 2017 dollars per capita) | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
+| Single Family Permits (% change per 1,000 population) | No Effect<sup>1, 2</sup> | 14.992<br><span style="font-size: 0.85em;">(7.077, 22.907)</span> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> |
+| Personal Income (% change in $1000 per capita) | -3.793<br><span style="font-size: 0.85em;">(-5.480, -2.096)</span> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> |
+| Unemployment Rate (%) | No Effect<sup>1</sup> | -0.901<br><span style="font-size: 0.85em;">(-1.221, -0.581)</span> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> |
+
+: Notes: 1. Results are not statistically significant. 2. Model violates the parallel trends assumption.
