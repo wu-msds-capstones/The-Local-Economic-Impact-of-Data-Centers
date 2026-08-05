@@ -389,4 +389,88 @@ with open(geojson_path, "r") as f:
     counties_geojson = json.load(f)
 ```
 
+```{python}
+#| label: cluster-map
+#| fig-cap: "Map of U.S. counties grouped into two clusters based on non-treatment county characteristics, illustrating the rural-urban split used in subsequent analysis."
+combined_df = pd.concat(
+    [
+        cluster_0_df[["county_id"]].assign(cluster=0),
+        cluster_1_df[["county_id"]].assign(cluster=1),
+    ],
+    ignore_index=True,
+)
+
+eda_table_name = "Counties Colored By Cluster"
+cols_to_use = ["cluster"]
+
+cluster_labels = {
+    0: "0 (More Rural)",
+    1: "1 (More Urban)"
+}
+
+cluster_colors = {
+    "0 (More Rural)": "#C67A6D",
+    "1 (More Urban)": "#5B8FA8"
+}
+
+for i in cols_to_use:
+    value_col = i
+    map_df = combined_df[["county_id", value_col]].dropna().copy()
+
+    map_df["flag"] = map_df["cluster"].map(cluster_labels)
+
+    fig = px.choropleth(
+        map_df,
+        geojson=counties_geojson,
+        locations="county_id",
+        color="flag",
+        featureidkey="id",
+        color_discrete_map = cluster_colors,
+        category_orders={"flag": ["0 (More Rural)", "1 (More Urban)"]},
+        labels = {"flag": "Cluster"}
+    )
+
+    fig.update_traces(
+        marker_line_color="#F7F7F7",
+        marker_line_width=0.1
+    )
+    
+    fig.update_layout(
+        title=dict(
+            text=f"{eda_table_name}",
+            x=0.5,
+            xanchor="center",
+            y=0.98,
+            yanchor="top",
+            pad=dict(t=0, b=0),
+            font=dict(size=24)
+        ),
+        geo=dict(
+            scope="usa",
+            projection_type="albers usa",
+            showland=True,
+            landcolor="rgb(248, 248, 248)",
+            showcountries=False,
+            showlakes=False,
+            bgcolor="rgba(0,0,0,0)",
+            lonaxis=dict(range=[-125, -66]),
+            lataxis=dict(range=[24, 50])
+        ),
+        legend=dict(
+            title_text="",
+            x=0.98,
+            xanchor="right",
+            y=0.25,
+            yanchor="middle",
+            bgcolor="rgba(255,255,255,0.75)",
+            font=dict(size=18)
+        ),
+        margin=dict(l=0, r=0, t=0, b=0),
+        width=900,
+        height=450
+    )
+
+    fig.show()
+```
+
 ## Difference-in-Differences Regression
