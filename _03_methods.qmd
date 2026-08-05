@@ -52,6 +52,9 @@ df.loc[:, "estabs_log"] = np.log1p(df["estabs"])
 ```{python}
 #| label: fig-estabs-over-time
 #| fig-cap: "**National Total NAICS 518 Establishments (2007–2022)**. Annual count of U.S. computing infrastructure, data processing, and web hosting establishments. Dashed vertical lines denote key technological inflection points, including the onset of rapid sector expansion around 2013 and the release of GPT-3 in 2020."
+national_total_by_year = df[["year", "estabs"]]
+national_total_by_year = national_total_by_year.groupby('year').sum().reset_index()
+
 clean_nat_total = national_total_by_year[(national_total_by_year["year"] > 2006) & (national_total_by_year["year"] < 2023)].copy()
 
 sns.set_theme(style = "whitegrid", context = "talk")
