@@ -492,4 +492,146 @@ Table: Estimated Difference-in-Differences effects of data center presence on co
 | Personal Income (% change in $1000 per capita) | -3.793<br><span style="font-size: 0.85em;">(-5.480, -2.096)</span> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> |
 | Unemployment Rate (%) | No Effect<sup>1</sup> | -0.901<br><span style="font-size: 0.85em;">(-1.221, -0.581)</span> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> |
 
-: Notes: 1. Results are not statistically significant. 2. Model violates the parallel trends assumption.
+<div class="table-notes">
+
+<sup>1</sup> Result is not statistically significant.  
+<sup>2</sup> Model violates the parallel trends assumption.
+
+</div>
+
+
+```{python}
+#| label: diff-in-diff-examples
+#| fig-cap: "Event-study estimates of data center impacts on local outcomes."
+fig, axes = plt.subplots(3, 2, figsize=(10, 7), sharex=True)
+axes = axes.reshape(3, 2)
+
+cluster_colors = {0: "#C67A6D", 1: "#5B8FA8"}
+
+fig.text(0.28, 0.98, "Cluster 0 (More Rural)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[0])
+fig.text(0.78, 0.98, "Cluster 1 (More Urban)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[1])
+
+outcomes = [
+    ("personal_income_thousands_of_dollars_per_capita_log", "Log Personal Income", "first_dc_year"),
+    ("pm25_mean_daily_avg", "PM2.5 Mean Daily Avg", "first_dc_year"),
+    ("unemployment_rate_pct", "Unemployment Rate", "above_val_nearby_year")
+]
+
+for row, (outcome, clean_name, first_treat) in enumerate(outcomes):
+    row_results = []
+
+    for cluster, cluster_num in [(cluster_0_df, 0), (cluster_1_df, 1)]:
+        results, es_df = mlu.create_DiD_model(cluster, outcome, first_treat)
+        row_results.append((cluster_num, es_df.copy()))
+
+    y_min = min(es_df["ci_lower"].min() for _, es_df in row_results)
+    y_max = max(es_df["ci_upper"].max() for _, es_df in row_results)
+    y_pad = (y_max - y_min) * 0.08
+    y_min -= y_pad
+    y_max += y_pad
+
+    for col, (cluster_num, es_df) in enumerate(row_results):
+        ax = axes[row, col]
+        
+        ax.errorbar(
+            x=es_df.index,
+            y=es_df["effect"],
+            yerr=[es_df["effect"] - es_df["ci_lower"], es_df["ci_upper"] - es_df["effect"]],
+            fmt="o",
+            color=cluster_colors[cluster_num],
+            ecolor=cluster_colors[cluster_num],
+            capsize=3
+        )
+
+        ax.plot(
+            es_df.index, 
+            es_df["effect"], 
+            color=cluster_colors[cluster_num], 
+            linestyle="--", 
+            alpha=0.7
+            )
+
+        ax.axhline(0, color="black", linestyle="-", linewidth=1, alpha=0.7)
+        ax.axvline(0, color="#323638", linestyle=":", linewidth=1)
+        
+        ax.set_xticks(list(range(-5, 6)))
+        ax.set_xlim(-5.5, 5.5)
+
+        ax.set_ylim(y_min, y_max)
+
+        if col == 0:
+            ax.set_ylabel("Effect")
+        else:
+            ax.set_ylabel("")
+
+        if row == 2:
+            ax.set_xlabel("Relative Year")
+
+        ax.set_title(f"{clean_name} ({'Nearby Datacenters' if first_treat == 'above_val_nearby_year' else 'In-County Datacenters'})")
+
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+
+plt.show()
+```
+
+## Variational Autoencoder
+
+Table: Top predicted changes from the VAE counterfactual for Cluster 0 counties after a +2 data center tier shift. {#tbl-vae-cluster0}
+
+| Feature | Predicted change |
+|---|---:|
+| per_capita_personal_income_dollars_spatial_weighted_avg_5 | 679.119 |
+| nearby_datacenters_50mi | 16.684 |
+| estabs_asinh | 4.775 |
+| centroid_lon | 2.013 |
+| centroid_lat | 1.233 |
+| datacenters_per_100_sqmi | 0.580 |
+| employed_log | 0.558 |
+| civilian_labor_force_log | 0.545 |
+| population_log | 0.540 |
+| unemployed_log | 0.493 |
+| current_gdp_dollars_thousands_log | 0.467 |
+| current_gdp_dollars_thousands_spatial_weighted_avg_5_log | 0.248 |
+| estabs_spatial_asinh | 0.245 |
+| employed_spatial_weighted_avg_5_log | 0.232 |
+| civilian_labor_force_spatial_weighted_avg_5_log | 0.224 |
+| unemployed_spatial_weighted_avg_5_log | 0.218 |
+| datacenters_spatial_weighted_avg_5_log1p | 0.194 |
+| single_family_permits_per_1000_log1p | 0.190 |
+| estabs_yoy_raw_diff | 0.188 |
+| annual_payroll_public_services_per_capita_log1p | 0.154 |
+| nearby_datacenters_50mi_per_100_sqmi | 0.127 |
+| annual_payroll_trade_transport_per_capita_log1p | 0.095 |
+| estabs_asinh_growth | 0.094 |
+| annual_payroll_industrial_per_capita_log1p | 0.087 |
+| annual_payroll_professional_per_capita_log1p | 0.078 |
+
+Table: Top predicted changes from the VAE counterfactual for Cluster 1 counties after a +2 data center tier shift. {#tbl-vae-cluster1}
+
+| Feature | Predicted change |
+|---|---:|
+| per_capita_personal_income_dollars_spatial_weighted_avg_5 | 935.954 |
+| nearby_datacenters_50mi | 38.650 |
+| centroid_lon | 1.707 |
+| estabs_asinh | 1.126 |
+| annual_payroll_public_services_spatial_weighted_avg_5_per_capita | 0.983 |
+| estabs_yoy_raw_diff | 0.760 |
+| unemployed_log | 0.482 |
+| civilian_labor_force_log | 0.476 |
+| employed_log | 0.469 |
+| current_gdp_dollars_thousands_log | 0.458 |
+| population_log | 0.456 |
+| multifamily_permits_5_or_more_units_log1p | 0.452 |
+| centroid_lat | 0.401 |
+| annual_payroll_trade_transport_spatial_weighted_avg_5_per_capita | 0.378 |
+| estabs_spatial_asinh | 0.375 |
+| datacenters_spatial_weighted_avg_5_log1p | 0.325 |
+| multifamily_permits_5_or_more_units_spatial_weighted_avg_5_log1p | 0.313 |
+| current_gdp_dollars_thousands_spatial_weighted_avg_5_log | 0.312 |
+| unemployed_spatial_weighted_avg_5_log | 0.303 |
+| unemployment_rate_spatial_weighted_avg_5 | 0.298 |
+| datacenters_per_100_sqmi | 0.286 |
+| civilian_labor_force_spatial_weighted_avg_5_log | 0.263 |
+| employed_spatial_weighted_avg_5_log | 0.258 |
+| nearby_datacenters_50mi_per_100_sqmi | 0.251 |
+| annual_payroll_information_spatial_weighted_avg_5_per_capita_log1p | 0.240 |
