@@ -230,6 +230,8 @@ X_test = pca.transform(X_test)
 
 
 ```{python}
+#| label: fig-pca-counties
+#| fig-cap: "Two-dimensional principal component projection of U.S. counties using the top two principal components of geographic and demographic features, with color indicating logged data center count."
 plt.figure(figsize=(7, 5))
 scatter = plt.scatter(
     X_train[:, 0],
