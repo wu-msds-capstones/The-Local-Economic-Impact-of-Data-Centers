@@ -249,3 +249,17 @@ plt.colorbar(scatter, label='Logged Datacenter Count')
 plt.tight_layout()
 plt.show()
 ```
+
+
+
+::: {#tbl-cluster-summary}
+Table: Cluster-level summary statistics for county population, land area, unemployment, data center count, and log personal income.
+
+| Mean Characteristic   | Cluster 0 | Cluster 1 |
+|:----------------------|----------:|----------:|
+| Log Population       | 9.524     | 11.123    |
+| Land Area            | 6.269     | 6.787     |
+| Unemployment Rate    | 5.970     | 6.202     |
+| Data Center Count    | 1.348     | 10.411    |
+| Log Personal Income  | 3.630     | 3.709     |
+:::
