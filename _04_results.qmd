@@ -1,7 +1,7 @@
 # Results
 
 ```{python}
-#| eval: false
+#| output: false
 # Load all required libraries and databases for figures
 import importlib
 import os
@@ -65,7 +65,7 @@ county_df = con.execute("SELECT * FROM my_db.transformed.us_counties_spatial").d
 ```
 
 ```{python}
-#| eval: false
+#| output: false
 # Do df cleaning
 bus_county_year_df = dbu.all_county_years(county_df, year_start=2006, year_end=2022)
 
