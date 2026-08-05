@@ -227,3 +227,23 @@ pca = PCA(n_components=0.85, random_state=42)
 X_train = pca.fit_transform(X_train)
 X_test = pca.transform(X_test)
 ```
+
+
+```{python}
+plt.figure(figsize=(7, 5))
+scatter = plt.scatter(
+    X_train[:, 0],
+    X_train[:, 1],
+    c=y_train,
+    cmap='viridis',
+    edgecolors='none',
+    s=20,
+    alpha=0.3
+)
+plt.xlabel('Principal Component 1')
+plt.ylabel('Principal Component 2')
+plt.title('PCA Projection of US Counties by Logged Datacenter Count')
+plt.colorbar(scatter, label='Logged Datacenter Count')
+plt.tight_layout()
+plt.show()
+```
