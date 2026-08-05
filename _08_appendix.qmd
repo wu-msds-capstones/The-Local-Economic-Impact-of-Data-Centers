@@ -1,1 +1,19 @@
 # Appendix
+
+Table A.1: Data sources used in the analysis. {#tbl-appendix-data-sources}
+
+| Source Name | Specific Dataset Name | Purpose | Link |
+|---|---|---|---|
+| Plotly Sample Datasets GitHub Repository | geojson-counties-fips.json | Geographic data describing the borders of U.S. counties, used for mapping plots. | [Link](https://github.com/plotly/datasets/blob/master/geojson-counties-fips.json) |
+| California Health and Human Services Geoportal | US County Reference Data | Provides the geographic center of each county, allowing for distance calculations between counties. | [Link](https://gis.data.chhs.ca.gov/) |
+| US Census | County and County Equivalent Entities | List of FIPS county codes used to join data sources together. | [Link](https://www.census.gov/library/reference/code-lists/ansi.html#cou) |
+| Centers for Disease Control | Daily County-Level PM2.5 Concentrations 2001–2022 | Provides historical county-level PM2.5 air pollution estimates. | [Link](https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data) |
+| Bureau of Economic Analysis | Personal Income by County | Historical county-level data on average personal income. | [Link](https://www.bea.gov/data/income-saving/personal-income-by-county) |
+| US Census | County Business Patterns | County-level historical statistics on business count and employment levels. | [Link](https://www.census.gov/programs-surveys/cbp.html) |
+| Bureau of Economic Analysis | GDP by County | Historical county-level data on GDP output. | [Link](https://www.bea.gov/data/gdp/gdp-by-county) |
+| National Cancer Institute | County-level Population Files - Single-year Age Groups | Historical county population data. | [Link](https://seer.cancer.gov/popdata.thru.2023/download.html) |
+| Data.gov | Residential Construction Permits by County | Historical record of residential building permits by county. | [Link](https://catalog.data.gov/dataset/residential-construction-permits-by-county) |
+| US Department of Agriculture | Unemployment and median household income for the United States, States, and counties, 2000–23 | Historical record of unemployment rates by county. | [Link](https://www.ers.usda.gov/data-products/county-level-data-sets/county-level-data-sets-download-data) |
+| US Census | 2022 NAICS | Defines what each NAICS code means and when that definition was last updated. | [Link](https://www.census.gov/naics/?58967?yearbck=2022) |
+| US Census | Download the National Counties Gazetteer File | Provides information on county land and water area. | [Link](https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html) |
+| US Bureau of Labor Statistics | Quarterly Census of Employment and Wages | Provides a count of businesses that meet the NAICS 518 definition for data centers. | [Link](https://www.bls.gov/cew/downloadable-data-files.htm) |
