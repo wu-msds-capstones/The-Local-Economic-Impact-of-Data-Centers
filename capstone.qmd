@@ -19,5 +19,4 @@ format:
 {{< include _04_results.qmd >}}
 {{< include _05_discussion.qmd >}}
 {{< include _06_conclusions.qmd >}}
-{{< include _07_references.qmd >}}
 {{< include _08_appendix.qmd >}}

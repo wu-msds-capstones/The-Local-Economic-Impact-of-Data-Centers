@@ -23,7 +23,7 @@ Our primary tables are stored in the public schema, which is depicted in @fig-er
 %%| label: fig-erd-schema
 %%| fig-cap: "Entity-relationship diagram of county-level source tables used in the analysis."
 %%| fig-width: 18
-%%| fig-height: 10
+%%| fig-height: 8
 %%| out-width: 100%
 %%| mermaid-format: svg
 
