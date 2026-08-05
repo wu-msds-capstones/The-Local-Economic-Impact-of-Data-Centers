@@ -7,6 +7,10 @@
 ```{mermaid}
 %%| label: fig-erd-schema
 %%| fig-cap: "Entity-relationship diagram of county-level source tables used in the analysis."
+%%| fig-width: 18
+%%| fig-height: 24
+%%| out-width: 100%
+%%| mermaid-format: svg
 
 erDiagram
     us_counties {
@@ -142,8 +146,8 @@ erDiagram
     us_counties ||--o{ naics_518_establishments : ""
     us_counties ||--o{ business_patterns : ""
     us_counties ||--o{ county_distances_lookup : ""
-    us_counties ||--o{ nails_518_nearby_estabs_50mi : ""
-    nails_code_look_up ||--o{ business_patterns : ""
+    us_counties ||--o{ naics_518_nearby_estabs_50mi : ""
+    naics_code_look_up ||--o{ business_patterns : ""
 ```
 
 ## Data Cleaning
