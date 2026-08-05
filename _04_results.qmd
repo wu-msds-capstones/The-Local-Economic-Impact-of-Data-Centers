@@ -253,7 +253,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-With the PCA model fit, we use K-means clustering to separate the data into two groups. The resulting groups appear to separate rural from urban and suburban counties. @tbl-cluster-summary shows the mean characteristics of these groups for a small set of features. The @fig-cluster-map shows how these clusters are distributed across the contiguous United States.
+With the PCA model fit, we use K-means clustering to separate the data into two groups. The resulting groups appear to separate rural from urban and suburban counties. @tbl-cluster-summary shows the mean characteristics of these groups for a small set of features. @fig-cluster-map shows how these clusters are distributed across the contiguous United States.
 
 ::: {#tbl-cluster-summary}
 Table: Cluster-level summary statistics for county population, land area, unemployment, data center count, and log personal income.
@@ -655,4 +655,4 @@ Table: Top predicted changes from the VAE counterfactual for Cluster 1 counties 
 | nearby_datacenters_50mi_per_100_sqmi | 0.251 |
 | annual_payroll_information_spatial_weighted_avg_5_per_capita_log1p | 0.240 |
 
-As is evident in the table above, the model shifted nearly all output features in a positive direction. This is likely because the decoder learned a broad conditional shift associated with higher data center tiers, rather than a feature-specific response. Since the model was not constrained to preserve economic relationships (e.g., consistency between unemployment and sectoral employment), it appears to have captured a generalized upward movement in the feature space instead of a meaningful causal pattern.
+As is evident in @tbl-vae-cluster0 and @tbl-vae-cluster1, the model shifted nearly all output features in a positive direction for both clusters. This is likely because the decoder learned a broad conditional shift associated with higher data center tiers, rather than a feature-specific response. Since the model was not constrained to preserve economic relationships (e.g., consistency between unemployment and sectoral employment), it appears to have captured a generalized upward movement in the feature space instead of a meaningful causal pattern.
