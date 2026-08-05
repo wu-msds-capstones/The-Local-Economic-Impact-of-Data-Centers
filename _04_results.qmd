@@ -64,6 +64,8 @@ emp_df = con.execute("SELECT * FROM my_db.transformed.unemployment").df()
 county_df = con.execute("SELECT * FROM my_db.transformed.us_counties_spatial").df()
 ```
 
+## PCA & K-Means Clustering
+
 ```{python}
 #| output: false
 # Do df cleaning
@@ -228,7 +230,6 @@ X_train = pca.fit_transform(X_train)
 X_test = pca.transform(X_test)
 ```
 
-
 ```{python}
 #| label: fig-pca-counties
 #| fig-cap: "Two-dimensional principal component projection of U.S. counties using the top two principal components of geographic and demographic features, with color indicating logged data center count."
@@ -262,4 +263,4 @@ Table: Cluster-level summary statistics for county population, land area, unempl
 | Unemployment Rate    | 5.970     | 6.202     |
 | Data Center Count    | 1.348     | 10.411    |
 | Log Personal Income  | 3.630     | 3.709     |
-:::
+## Difference-in-Differences Regression
