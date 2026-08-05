@@ -492,4 +492,9 @@ Table: Estimated Difference-in-Differences effects of data center presence on co
 | Personal Income (% change in $1000 per capita) | -3.793<br><span style="font-size: 0.85em;">(-5.480, -2.096)</span> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> |
 | Unemployment Rate (%) | No Effect<sup>1</sup> | -0.901<br><span style="font-size: 0.85em;">(-1.221, -0.581)</span> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> |
 
-: Notes: 1. Results are not statistically significant. 2. Model violates the parallel trends assumption.
+<div class="table-notes">
+
+<sup>1</sup> Result is not statistically significant.  
+<sup>2</sup> Model violates the parallel trends assumption.
+
+</div>
