@@ -498,3 +498,78 @@ Table: Estimated Difference-in-Differences effects of data center presence on co
 <sup>2</sup> Model violates the parallel trends assumption.
 
 </div>
+
+
+```{python}
+#| label: diff-in-diff-examples
+#| fig-cap: "Event-study estimates of data center impacts on local outcomes."
+fig, axes = plt.subplots(3, 2, figsize=(10, 7), sharex=True)
+axes = axes.reshape(3, 2)
+
+cluster_colors = {0: "#C67A6D", 1: "#5B8FA8"}
+
+fig.text(0.28, 0.98, "Cluster 0 (More Rural)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[0])
+fig.text(0.78, 0.98, "Cluster 1 (More Urban)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[1])
+
+outcomes = [
+    ("personal_income_thousands_of_dollars_per_capita_log", "Log Personal Income", "first_dc_year"),
+    ("pm25_mean_daily_avg", "PM2.5 Mean Daily Avg", "first_dc_year"),
+    ("unemployment_rate_pct", "Unemployment Rate", "above_val_nearby_year")
+]
+
+for row, (outcome, clean_name, first_treat) in enumerate(outcomes):
+    row_results = []
+
+    for cluster, cluster_num in [(cluster_0_df, 0), (cluster_1_df, 1)]:
+        results, es_df = mlu.create_DiD_model(cluster, outcome, first_treat)
+        row_results.append((cluster_num, es_df.copy()))
+
+    y_min = min(es_df["ci_lower"].min() for _, es_df in row_results)
+    y_max = max(es_df["ci_upper"].max() for _, es_df in row_results)
+    y_pad = (y_max - y_min) * 0.08
+    y_min -= y_pad
+    y_max += y_pad
+
+    for col, (cluster_num, es_df) in enumerate(row_results):
+        ax = axes[row, col]
+        
+        ax.errorbar(
+            x=es_df.index,
+            y=es_df["effect"],
+            yerr=[es_df["effect"] - es_df["ci_lower"], es_df["ci_upper"] - es_df["effect"]],
+            fmt="o",
+            color=cluster_colors[cluster_num],
+            ecolor=cluster_colors[cluster_num],
+            capsize=3
+        )
+
+        ax.plot(
+            es_df.index, 
+            es_df["effect"], 
+            color=cluster_colors[cluster_num], 
+            linestyle="--", 
+            alpha=0.7
+            )
+
+        ax.axhline(0, color="black", linestyle="-", linewidth=1, alpha=0.7)
+        ax.axvline(0, color="#323638", linestyle=":", linewidth=1)
+        
+        ax.set_xticks(list(range(-5, 6)))
+        ax.set_xlim(-5.5, 5.5)
+
+        ax.set_ylim(y_min, y_max)
+
+        if col == 0:
+            ax.set_ylabel("Effect")
+        else:
+            ax.set_ylabel("")
+
+        if row == 2:
+            ax.set_xlabel("Relative Year")
+
+        ax.set_title(f"{clean_name} ({'Nearby Datacenters' if first_treat == 'above_val_nearby_year' else 'In-County Datacenters'})")
+
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+
+plt.show()
+```
