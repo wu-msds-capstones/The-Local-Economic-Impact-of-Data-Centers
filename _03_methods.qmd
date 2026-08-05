@@ -69,7 +69,7 @@ We chose a Variational Autoencoder over a standard deterministic autoencoder spe
 
 One of the main challenges in training the Variational Autoencoder was defining an appropriate validation strategy. Our first approach was to train the VAE on historical data and reserve the final two years of our dataset as a temporal test set. However, the model exhibited significantly higher reconstruction error on these held-out final years compared to the training set. To address this, we transitioned from a temporal split to a spatial holdout strategy, training the model across all years while holding out a random 20% sample of counties. Rather than forcing the model to forecast future states, this approach reframed the objective toward spatial interpolation across unobserved counties—a theoretical shift that improved reconstruction performance.
 
-The failure of the temporal split highlights the fact that data center deployment accelerates rapidly near the end of our timeline (Figure X), and average facility scale increases over time. Consequently, the economic relationships in the final two years differed structurally from preceding periods, making temporal extrapolation less reliable than spatial interpolation.
+The failure of the temporal split highlights the fact that data center deployment accelerates rapidly near the end of our timeline (@fig-estabs-over-time), and average facility scale increases over time. Consequently, the economic relationships in the final two years differed structurally from preceding periods, making temporal extrapolation less reliable than spatial interpolation.
 
 ```{python}
 #| label: fig-estabs-over-time
