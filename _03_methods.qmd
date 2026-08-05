@@ -1,1 +1,145 @@
 # Data
+
+```{python}
+#| output: false
+import pandas as pd
+import numpy as np
+import duckdb
+from pathlib import Path
+import os
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+import subprocess
+import sys
+from skimpy import skim
+import seaborn as sns
+import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
+
+# For geo plots
+import json
+import urllib.request
+import plotly.graph_objects as go
+import utils.map_utils as mu
+import importlib
+importlib.reload(mu)
+
+load_dotenv()
+data_dir = Path(os.environ["DATA_DIR"])
+
+database_url = os.getenv("DUCKDB_DB_URL")
+engine = create_engine(database_url)
+con = duckdb.connect()
+con.execute("INSTALL postgres; LOAD postgres;")  
+con.execute(f"ATTACH '{database_url}' AS my_db (TYPE postgres, READ_ONLY);")
+
+df = con.execute("SELECT * FROM my_db.transformed.naics_518_establishments").df()
+df_nearby = con.execute("SELECT * FROM my_db.transformed.naics_518_nearby_estabs_50mi").df()
+cols = df.columns
+```
+
+```{python}
+#| output: false
+df = df[(df["year"] > 2006) & (df["year"] < 2023)].reset_index(drop=True)
+
+df.loc[:, "estabs_log"] = np.log1p(df["estabs"])
+```
+
+## Statistical Approach
+
+## Machine Learning Approach
+
+```{python}
+#| label: fig-estabs-over-time
+#| fig-cap: "**National Total NAICS 518 Establishments (2007–2022)**. Annual count of U.S. computing infrastructure, data processing, and web hosting establishments. Dashed vertical lines denote key technological inflection points, including the onset of rapid sector expansion around 2013 and the release of GPT-3 in 2020."
+clean_nat_total = national_total_by_year[(national_total_by_year["year"] > 2006) & (national_total_by_year["year"] < 2023)].copy()
+
+sns.set_theme(style = "whitegrid", context = "talk")
+
+fig, ax = plt.subplots(figsize = (6, 6))
+
+sns.lineplot(
+    data = clean_nat_total,
+    x= "year",
+    y = "estabs",
+    ax = ax,
+    linewidth = 3.5,
+    marker = "o",
+    color = "#ff7f0e",
+    markerfacecolor = "white",
+    markeredgecolor = "#ff7f0e",
+    markersize = 8
+)
+
+# Rapid Growth Period
+ax.axvline(
+    x=2013,
+    color="red",
+    linestyle="--",
+    linewidth=1.5,
+    alpha=0.7,
+)
+
+ax.annotate(
+    "Rapid growth begins",
+    xy=(2013, clean_nat_total.loc[clean_nat_total["year"] == 2013, "estabs"].values[0]),
+    xytext=(2012.5, 18000),  
+    arrowprops=dict(
+        arrowstyle="->",
+        color="#a6132c",
+        linewidth=1.2
+    ),
+    fontsize=11,
+    color="#a6132c",
+    ha="right",
+)
+
+# GPT-3
+ax.axvline(
+    x=2020.5,
+    color="blue",
+    linestyle="--",
+    linewidth=1.5,
+    alpha=0.7,
+)
+
+ax.annotate(
+    "GPT-3 Introduced",
+    xy=(2020.5, 25500),
+    xytext=(2020, 30000),  
+    arrowprops=dict(
+        arrowstyle="->",
+        color="#233284",
+        linewidth=1.2
+    ),
+    fontsize=11,
+    color="#233284",
+    ha="right",
+)
+
+ax.set_title("National total NAICS 518 establishments (2007–2022)", fontsize=14, pad=15)
+ax.set(xlabel=None)
+ax.set_ylabel("Establishments")
+
+years = clean_nat_total["year"].astype(int)
+ax.set_xticks(years)
+ax.set_xticklabels(years, rotation = 45)
+ax.set_xlim(2006.80, 2022.20)
+ax.margins(x=0)
+
+ymax = clean_nat_total["estabs"].max()
+ax.set_ylim(0, ymax * 1.1)
+
+ax.yaxis.set_major_formatter(FuncFormatter(lambda x, pos: f"{int(x):,}"))
+
+ax.grid(axis = "y", alpha = 0.2)
+ax.grid(axis = "x", visible = False)
+
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+ax.tick_params(axis = "both", which = "major", labelsize = 12)
+
+fig.tight_layout()
+
+plt.show()
+```
