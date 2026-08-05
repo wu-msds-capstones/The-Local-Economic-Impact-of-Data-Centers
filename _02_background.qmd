@@ -8,7 +8,7 @@
 %%| label: fig-erd-schema
 %%| fig-cap: "Entity-relationship diagram of county-level source tables used in the analysis."
 %%| fig-width: 18
-%%| fig-height: 24
+%%| fig-height: 10
 %%| out-width: 100%
 %%| mermaid-format: svg
 
