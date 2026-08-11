@@ -27,4 +27,8 @@ kaleido
 python-dotenv
 
 # Local packages
--e .
+#-e .
+
+psycopg2-binary
+jupyter
+pyyaml
