@@ -1,3 +1,6 @@
+---
+csl: numeric    
+---
 # Introduction
 While the first data center was opened in 1946 [@Tozzi2026], it was not until the 2000s that data centers started to become common. Furthermore, it has only been a handful of years since an explosion occurred in both the construction and scale of new data centers due to the widespread adoption of LLMs. This growth has led to a dramatic increase in the amount of energy and water used, the space needed for these developments, and the potential economic impact [@Schulz2025]. Most of the public discourse and recent research on data centers revolve around the impacts on energy and water. However, the economic impact on the communities surrounding these data centers has received relatively little attention to date.
 
