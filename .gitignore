@@ -1,5 +1,7 @@
 /.quarto/
 /_output/
+*.js
+*.css
 
 # OS Files
 .DS_Store
