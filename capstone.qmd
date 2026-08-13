@@ -5,6 +5,7 @@ authors:
   - Ian Walsh
   - Logan Rosell
 bibliography: references.bib
+csl: styles/nature-brackets.csl
 title-block-banner: true
 format: 
   html:
