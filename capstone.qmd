@@ -6,6 +6,7 @@ authors:
   - Logan Rosell
 bibliography: references.bib
 csl: styles/nature-brackets.csl
+citeproc: true
 title-block-banner: true
 format: 
   html:

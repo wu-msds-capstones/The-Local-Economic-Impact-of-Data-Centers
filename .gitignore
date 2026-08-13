@@ -36,3 +36,5 @@ shared_data/
 __pycache__/
 *.pyc
 *.quarto_ipynb
+
+**/*.quarto_ipynb
