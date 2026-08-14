@@ -141,17 +141,15 @@ intersection_geom = buffer_series.intersection(neighbor_series, align=False)
 
 overlap = gpd.GeoDataFrame(overlap, geometry=intersection_geom, crs=counties_final.crs)
 overlap = overlap[overlap.geometry.notna() & ~overlap.geometry.is_empty].copy()
-
-state_boundaries = (
-    base_map
-    .dissolve(by="state")
-    .boundary
-)
 ```
 
 ```{python}
 #| label: fig-50-mile-buffer
 #| fig-cap: "This figure shows the 50-mile buffer surrounding Multnomah County and the portions of neighboring counties that fall within that buffer. Counties outlined in dark orange intersect the buffer and therefore contribute to the area-weighted measure of nearby data-center establishments; counties and state boundaries are included for geographic context. Map orientation has been rotated for visual clarity."
+#| fig-width: 7.2
+#| fig-height: 8.0
+#| out-width: 88%
+#| fig-align: center
 oregon = counties_final[counties_final["state"] == "OR"].copy()
 washington = counties_final[counties_final["state"] == "WA"].copy()
 
@@ -219,11 +217,11 @@ nearby_outline_plot = rotate_gdf(
 rotated_buffer = buffers_plot.geometry.iloc[0]
 minx, miny, maxx, maxy = rotated_buffer.bounds
 
-pad_x = (maxx - minx) * 0.52
-pad_y = (maxy - miny) * 0.70
+pad_x = (maxx - minx) * 0.30
+pad_y = (maxy - miny) * 0.62
 
 
-fig, ax = plt.subplots(figsize=(9, 10))
+fig, ax = plt.subplots(figsize=(7.2, 8.0))
 
 
 # counties
@@ -309,7 +307,7 @@ for _, row in state_labels.iterrows():
         x,
         y,
         label_map[row["state"]],
-        fontsize=11,
+        fontsize=10,
         color="#4a4a4a",
         ha="center",
         va="center",
@@ -378,7 +376,8 @@ ax.legend(
     handles=legend_handles,
     loc="lower left",
     frameon=True,
-    framealpha=0.95
+    framealpha=0.95,
+    fontsize=9
 )
 
 
