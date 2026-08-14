@@ -7,7 +7,7 @@ project:
 manuscript:
   article: capstone.qmd
 
-format: 
+format:
   html:
     theme:
       light: lightly
