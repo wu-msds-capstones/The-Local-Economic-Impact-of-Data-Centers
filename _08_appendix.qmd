@@ -1,6 +1,8 @@
 # Appendix
 
-Table A.1: Data sources used in the analysis.
+## Appendix A: Data Sources
+
+### Table A.1: Data sources used in the analysis.
 
 | Source Name | Specific Dataset Name | Purpose | Link |
 |---|---|---|---|
@@ -17,3 +19,28 @@ Table A.1: Data sources used in the analysis.
 | US Census | 2022 NAICS | Defines what each NAICS code means and when that definition was last updated. | [Link](https://www.census.gov/naics/?58967?yearbck=2022) |
 | US Census | Download the National Counties Gazetteer File | Provides information on county land and water area. | [Link](https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html) |
 | US Bureau of Labor Statistics | Quarterly Census of Employment and Wages | Provides a count of businesses that meet the NAICS 518 definition for data centers. | [Link](https://www.bls.gov/cew/downloadable-data-files.htm) |
+
+### Business Patterns Fields
+
+For readability, @fig-erd-schema displays only the primary identifiers and aggregate measures in the `business_patterns` table. The underlying table also retains establishment-count fields by employment-size category: `est_lt_5`, `est5_9`, `est10_19`, `est20_49`, `est50_99`, `est100_249`, `est250_499`, `est500_999`, `est_gt_1000`, `est1000_1500`, `est1500_2500`, `est2500_5000`, and `est_gt_5000`.
+
+## Appendix B: Supplementary Results
+
+### Table B.1: Estimated five-year difference-in-differences effects of data center exposure on county outcomes, by cluster and treatment type.
+
+| Outcome | Unit | C0: In-county | C0: Nearby | C1: In-county | C1: Nearby |
+|---|---|---:|---:|---:|---:|
+| Trade & Transport Employment | % change per capita | -0.337<br><span style="font-size: 0.85em; color: #6c757d;">(−0.579, −0.097)</span> | No effect² | No effect¹² | No effect¹ |
+| Public Services Employment | % change per capita | No effect¹ | No effect² | No effect¹ | No effect¹² |
+| Professional Employment | % change per capita | No effect¹ | No effect¹² | No effect¹² | No effect¹ |
+| Primary Industry Employment | % change per capita | No effect² | No effect¹ | No effect² | -0.173<br><span style="font-size: 0.85em; color: #6c757d;">(−0.308, −0.038)</span> |
+| Information Employment | % change per capita | No effect¹² | No effect¹ | No effect¹² | No effect¹ |
+| Industrial Employment | % change per capita | -0.759<br><span style="font-size: 0.85em; color: #6c757d;">(−1.097, −0.421)</span> | No effect¹ | No effect² | No effect¹ |
+| Nearby mean daily PM2.5 | μg/m³ | -0.398<br><span style="font-size: 0.85em; color: #6c757d;">(−0.662, −0.133)</span> | No effect² | No effect¹ | No effect² |
+| In-county mean daily PM2.5 | μg/m³ | -0.398<br><span style="font-size: 0.85em; color: #6c757d;">(−0.681, −0.115)</span> | No effect² | No effect¹ | No effect² |
+| Real GDP | % change in $1,000 2017 dollars per capita | No effect¹ | No effect¹² | No effect¹² | No effect¹ |
+| Single-family permits | % change per 1,000 population | No effect¹² | 14.992<br><span style="font-size: 0.85em; color: #6c757d;">(7.077, 22.907)</span> | No effect¹ | No effect¹² |
+| Personal income | % change in $1,000 per capita | -3.793<br><span style="font-size: 0.85em; color: #6c757d;">(−5.480, −2.096)</span> | No effect¹² | No effect¹² | No effect¹² |
+| Unemployment rate | % | No effect¹ | -0.901<br><span style="font-size: 0.85em; color: #6c757d;">(−1.221, −0.581)</span> | No effect¹ | No effect¹² |
+
+*Note.* C0 = Cluster 0; C1 = Cluster 1. “In-county” exposure is defined as crossing the threshold from two or fewer to three or more NAICS 518 establishments in the county. “Nearby” exposure is defined as crossing the threshold from 112 or fewer to 113 or more NAICS 518 establishments within a 50-mile radius. Parentheses contain 95% confidence intervals. “No effect” indicates no statistically interpretable effect because the estimate is not statistically significant (¹), the model violates the parallel trends assumption (²), or both.

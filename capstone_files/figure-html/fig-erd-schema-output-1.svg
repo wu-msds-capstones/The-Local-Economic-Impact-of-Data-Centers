@@ -1,0 +1,584 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="727pt" height="1092pt" viewBox="0.00 0.00 727.00 1092.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(0.72 1091.72)">
+<title>county_erd</title>
+<!-- us_counties -->
+<g id="node1" class="node">
+<title>us_counties</title>
+<polygon fill="none" stroke="#7c5cc4" points="262,-809.5 262,-1091 412.5,-1091 412.5,-809.5 262,-809.5"/>
+<polygon fill="#e7dcff" stroke="none" points="263,-1068.5 263,-1090 411.5,-1090 411.5,-1068.5 263,-1068.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="263,-1068.5 263,-1090 411.5,-1090 411.5,-1068.5 263,-1068.5"/>
+<text xml:space="preserve" text-anchor="start" x="305.38" y="-1076.55" font-family="Arial" font-weight="bold" font-size="11.00">us_counties</text>
+<polygon fill="none" stroke="#7c5cc4" points="263,-1047 263,-1068.5 297.25,-1068.5 297.25,-1047 263,-1047"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-1054" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-1047 297.25,-1068.5 388.5,-1068.5 388.5,-1047 297.25,-1047"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-1054" font-family="Arial" font-size="11.00">county_id</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-1047 388.5,-1068.5 411.5,-1068.5 411.5,-1047 388.5,-1047"/>
+<text xml:space="preserve" text-anchor="start" x="392.5" y="-1054" font-family="Arial" font-size="11.00">PK</text>
+<polygon fill="none" stroke="#7c5cc4" points="263,-1025.5 263,-1047 297.25,-1047 297.25,-1025.5 263,-1025.5"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-1032.5" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-1025.5 297.25,-1047 388.5,-1047 388.5,-1025.5 297.25,-1025.5"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-1032.5" font-family="Arial" font-size="11.00">county_name</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-1025.5 388.5,-1047 411.5,-1047 411.5,-1025.5 388.5,-1025.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="263,-1004 263,-1025.5 297.25,-1025.5 297.25,-1004 263,-1004"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-1011" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-1004 297.25,-1025.5 388.5,-1025.5 388.5,-1004 297.25,-1004"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-1011" font-family="Arial" font-size="11.00">state</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-1004 388.5,-1025.5 411.5,-1025.5 411.5,-1004 388.5,-1004"/>
+<polygon fill="none" stroke="#7c5cc4" points="263,-982.5 263,-1004 297.25,-1004 297.25,-982.5 263,-982.5"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-989.5" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-982.5 297.25,-1004 388.5,-1004 388.5,-982.5 297.25,-982.5"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-989.5" font-family="Arial" font-size="11.00">state_fips_code</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-982.5 388.5,-1004 411.5,-1004 411.5,-982.5 388.5,-982.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="263,-961 263,-982.5 297.25,-982.5 297.25,-961 263,-961"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-968" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-961 297.25,-982.5 388.5,-982.5 388.5,-961 297.25,-961"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-968" font-family="Arial" font-size="11.00">county_fips_code</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-961 388.5,-982.5 411.5,-982.5 411.5,-961 388.5,-961"/>
+<polygon fill="none" stroke="#7c5cc4" points="263,-939.5 263,-961 297.25,-961 297.25,-939.5 263,-939.5"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-946.5" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-939.5 297.25,-961 388.5,-961 388.5,-939.5 297.25,-939.5"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-946.5" font-family="Arial" font-size="11.00">county_ns_code</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-939.5 388.5,-961 411.5,-961 411.5,-939.5 388.5,-939.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="263,-918 263,-939.5 297.25,-939.5 297.25,-918 263,-918"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-925" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-918 297.25,-939.5 388.5,-939.5 388.5,-918 297.25,-918"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-925" font-family="Arial" font-size="11.00">fips_class_code</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-918 388.5,-939.5 411.5,-939.5 411.5,-918 388.5,-918"/>
+<polygon fill="none" stroke="#7c5cc4" points="263,-896.5 263,-918 297.25,-918 297.25,-896.5 263,-896.5"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-903.5" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-896.5 297.25,-918 388.5,-918 388.5,-896.5 297.25,-896.5"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-903.5" font-family="Arial" font-size="11.00">functional_status</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-896.5 388.5,-918 411.5,-918 411.5,-896.5 388.5,-896.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="263,-875 263,-896.5 297.25,-896.5 297.25,-875 263,-875"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-882" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-875 297.25,-896.5 388.5,-896.5 388.5,-875 297.25,-875"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-882" font-family="Arial" font-size="11.00">centroid_lat</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-875 388.5,-896.5 411.5,-896.5 411.5,-875 388.5,-875"/>
+<polygon fill="none" stroke="#7c5cc4" points="263,-853.5 263,-875 297.25,-875 297.25,-853.5 263,-853.5"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-860.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-853.5 297.25,-875 388.5,-875 388.5,-853.5 297.25,-853.5"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-860.5" font-family="Arial" font-size="11.00">centroid_lon</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-853.5 388.5,-875 411.5,-875 411.5,-853.5 388.5,-853.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="263,-832 263,-853.5 297.25,-853.5 297.25,-832 263,-832"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-839" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-832 297.25,-853.5 388.5,-853.5 388.5,-832 297.25,-832"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-839" font-family="Arial" font-size="11.00">land_area_sqmi</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-832 388.5,-853.5 411.5,-853.5 411.5,-832 388.5,-832"/>
+<polygon fill="none" stroke="#7c5cc4" points="263,-810.5 263,-832 297.25,-832 297.25,-810.5 263,-810.5"/>
+<text xml:space="preserve" text-anchor="start" x="267" y="-817.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="297.25,-810.5 297.25,-832 388.5,-832 388.5,-810.5 297.25,-810.5"/>
+<text xml:space="preserve" text-anchor="start" x="301.25" y="-817.5" font-family="Arial" font-size="11.00">water_area_sqmi</text>
+<polygon fill="none" stroke="#7c5cc4" points="388.5,-810.5 388.5,-832 411.5,-832 411.5,-810.5 388.5,-810.5"/>
+</g>
+<!-- population -->
+<g id="node2" class="node">
+<title>population</title>
+<polygon fill="none" stroke="#7c5cc4" points="123.75,-687.75 123.75,-775.75 260.75,-775.75 260.75,-687.75 123.75,-687.75"/>
+<polygon fill="#e7dcff" stroke="none" points="124.75,-753.25 124.75,-774.75 259.75,-774.75 259.75,-753.25 124.75,-753.25"/>
+<polygon fill="none" stroke="#7c5cc4" points="124.75,-753.25 124.75,-774.75 259.75,-774.75 259.75,-753.25 124.75,-753.25"/>
+<text xml:space="preserve" text-anchor="start" x="164.12" y="-761.3" font-family="Arial" font-weight="bold" font-size="11.00">population</text>
+<polygon fill="none" stroke="#7c5cc4" points="124.75,-731.75 124.75,-753.25 159,-753.25 159,-731.75 124.75,-731.75"/>
+<text xml:space="preserve" text-anchor="start" x="128.75" y="-738.75" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="159,-731.75 159,-753.25 216.5,-753.25 216.5,-731.75 159,-731.75"/>
+<text xml:space="preserve" text-anchor="start" x="163" y="-738.75" font-family="Arial" font-size="11.00">year</text>
+<polygon fill="none" stroke="#7c5cc4" points="216.5,-731.75 216.5,-753.25 259.75,-753.25 259.75,-731.75 216.5,-731.75"/>
+<text xml:space="preserve" text-anchor="start" x="220.5" y="-738.75" font-family="Arial" font-size="11.00">PK</text>
+<polygon fill="none" stroke="#7c5cc4" points="124.75,-710.25 124.75,-731.75 159,-731.75 159,-710.25 124.75,-710.25"/>
+<text xml:space="preserve" text-anchor="start" x="128.75" y="-717.25" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="159,-710.25 159,-731.75 216.5,-731.75 216.5,-710.25 159,-710.25"/>
+<text xml:space="preserve" text-anchor="start" x="163" y="-717.25" font-family="Arial" font-size="11.00">county_id</text>
+<polygon fill="none" stroke="#7c5cc4" points="216.5,-710.25 216.5,-731.75 259.75,-731.75 259.75,-710.25 216.5,-710.25"/>
+<text xml:space="preserve" text-anchor="start" x="220.5" y="-717.25" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="124.75,-688.75 124.75,-710.25 159,-710.25 159,-688.75 124.75,-688.75"/>
+<text xml:space="preserve" text-anchor="start" x="128.75" y="-695.75" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="159,-688.75 159,-710.25 216.5,-710.25 216.5,-688.75 159,-688.75"/>
+<text xml:space="preserve" text-anchor="start" x="163" y="-695.75" font-family="Arial" font-size="11.00">population</text>
+<polygon fill="none" stroke="#7c5cc4" points="216.5,-688.75 216.5,-710.25 259.75,-710.25 259.75,-688.75 216.5,-688.75"/>
+</g>
+<!-- us_counties&#45;&gt;population -->
+<g id="edge23" class="edge">
+<title>us_counties-&gt;population</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M262.17,-847C258.69,-847 256.62,-847 256.62,-847 256.62,-847 256.62,-808.22 256.62,-775.65"/>
+</g>
+<!-- personal_income -->
+<g id="node3" class="node">
+<title>personal_income</title>
+<polygon fill="none" stroke="#7c5cc4" points="374.62,-677 374.62,-786.5 651.88,-786.5 651.88,-677 374.62,-677"/>
+<polygon fill="#e7dcff" stroke="none" points="375.62,-764 375.62,-785.5 650.88,-785.5 650.88,-764 375.62,-764"/>
+<polygon fill="none" stroke="#7c5cc4" points="375.62,-764 375.62,-785.5 650.88,-785.5 650.88,-764 375.62,-764"/>
+<text xml:space="preserve" text-anchor="start" x="468.25" y="-772.05" font-family="Arial" font-weight="bold" font-size="11.00">personal_income</text>
+<polygon fill="none" stroke="#7c5cc4" points="375.62,-742.5 375.62,-764 409.88,-764 409.88,-742.5 375.62,-742.5"/>
+<text xml:space="preserve" text-anchor="start" x="379.62" y="-749.5" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="409.88,-742.5 409.88,-764 607.62,-764 607.62,-742.5 409.88,-742.5"/>
+<text xml:space="preserve" text-anchor="start" x="413.88" y="-749.5" font-family="Arial" font-size="11.00">year</text>
+<polygon fill="none" stroke="#7c5cc4" points="607.62,-742.5 607.62,-764 650.88,-764 650.88,-742.5 607.62,-742.5"/>
+<text xml:space="preserve" text-anchor="start" x="611.62" y="-749.5" font-family="Arial" font-size="11.00">PK</text>
+<polygon fill="none" stroke="#7c5cc4" points="375.62,-721 375.62,-742.5 409.88,-742.5 409.88,-721 375.62,-721"/>
+<text xml:space="preserve" text-anchor="start" x="379.62" y="-728" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="409.88,-721 409.88,-742.5 607.62,-742.5 607.62,-721 409.88,-721"/>
+<text xml:space="preserve" text-anchor="start" x="413.88" y="-728" font-family="Arial" font-size="11.00">county_id</text>
+<polygon fill="none" stroke="#7c5cc4" points="607.62,-721 607.62,-742.5 650.88,-742.5 650.88,-721 607.62,-721"/>
+<text xml:space="preserve" text-anchor="start" x="611.62" y="-728" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="375.62,-699.5 375.62,-721 409.88,-721 409.88,-699.5 375.62,-699.5"/>
+<text xml:space="preserve" text-anchor="start" x="379.62" y="-706.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="409.88,-699.5 409.88,-721 607.62,-721 607.62,-699.5 409.88,-699.5"/>
+<text xml:space="preserve" text-anchor="start" x="413.88" y="-706.5" font-family="Arial" font-size="11.00">per_capita_personal_income_dollars</text>
+<polygon fill="none" stroke="#7c5cc4" points="607.62,-699.5 607.62,-721 650.88,-721 650.88,-699.5 607.62,-699.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="375.62,-678 375.62,-699.5 409.88,-699.5 409.88,-678 375.62,-678"/>
+<text xml:space="preserve" text-anchor="start" x="379.62" y="-685" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="409.88,-678 409.88,-699.5 607.62,-699.5 607.62,-678 409.88,-678"/>
+<text xml:space="preserve" text-anchor="start" x="413.88" y="-685" font-family="Arial" font-size="11.00">personal_income_thousands_of_dollars</text>
+<polygon fill="none" stroke="#7c5cc4" points="607.62,-678 607.62,-699.5 650.88,-699.5 650.88,-678 607.62,-678"/>
+</g>
+<!-- us_counties&#45;&gt;personal_income -->
+<g id="edge24" class="edge">
+<title>us_counties-&gt;personal_income</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M393.56,-809.71C393.56,-801.59 393.56,-793.72 393.56,-786.31"/>
+</g>
+<!-- gdp -->
+<g id="node4" class="node">
+<title>gdp</title>
+<polygon fill="none" stroke="#7c5cc4" points="0,-884.75 0,-1015.75 252.5,-1015.75 252.5,-884.75 0,-884.75"/>
+<polygon fill="#e7dcff" stroke="none" points="1,-993.25 1,-1014.75 251.5,-1014.75 251.5,-993.25 1,-993.25"/>
+<polygon fill="none" stroke="#7c5cc4" points="1,-993.25 1,-1014.75 251.5,-1014.75 251.5,-993.25 1,-993.25"/>
+<text xml:space="preserve" text-anchor="start" x="116.12" y="-1001.3" font-family="Arial" font-weight="bold" font-size="11.00">gdp</text>
+<polygon fill="none" stroke="#7c5cc4" points="1,-971.75 1,-993.25 35.25,-993.25 35.25,-971.75 1,-971.75"/>
+<text xml:space="preserve" text-anchor="start" x="5" y="-978.75" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="35.25,-971.75 35.25,-993.25 208.25,-993.25 208.25,-971.75 35.25,-971.75"/>
+<text xml:space="preserve" text-anchor="start" x="39.25" y="-978.75" font-family="Arial" font-size="11.00">year</text>
+<polygon fill="none" stroke="#7c5cc4" points="208.25,-971.75 208.25,-993.25 251.5,-993.25 251.5,-971.75 208.25,-971.75"/>
+<text xml:space="preserve" text-anchor="start" x="212.25" y="-978.75" font-family="Arial" font-size="11.00">PK</text>
+<polygon fill="none" stroke="#7c5cc4" points="1,-950.25 1,-971.75 35.25,-971.75 35.25,-950.25 1,-950.25"/>
+<text xml:space="preserve" text-anchor="start" x="5" y="-957.25" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="35.25,-950.25 35.25,-971.75 208.25,-971.75 208.25,-950.25 35.25,-950.25"/>
+<text xml:space="preserve" text-anchor="start" x="39.25" y="-957.25" font-family="Arial" font-size="11.00">county_id</text>
+<polygon fill="none" stroke="#7c5cc4" points="208.25,-950.25 208.25,-971.75 251.5,-971.75 251.5,-950.25 208.25,-950.25"/>
+<text xml:space="preserve" text-anchor="start" x="212.25" y="-957.25" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="1,-928.75 1,-950.25 35.25,-950.25 35.25,-928.75 1,-928.75"/>
+<text xml:space="preserve" text-anchor="start" x="5" y="-935.75" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="35.25,-928.75 35.25,-950.25 208.25,-950.25 208.25,-928.75 35.25,-928.75"/>
+<text xml:space="preserve" text-anchor="start" x="39.25" y="-935.75" font-family="Arial" font-size="11.00">real_gdp_2017_dollars_thousands</text>
+<polygon fill="none" stroke="#7c5cc4" points="208.25,-928.75 208.25,-950.25 251.5,-950.25 251.5,-928.75 208.25,-928.75"/>
+<polygon fill="none" stroke="#7c5cc4" points="1,-907.25 1,-928.75 35.25,-928.75 35.25,-907.25 1,-907.25"/>
+<text xml:space="preserve" text-anchor="start" x="5" y="-914.25" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="35.25,-907.25 35.25,-928.75 208.25,-928.75 208.25,-907.25 35.25,-907.25"/>
+<text xml:space="preserve" text-anchor="start" x="39.25" y="-914.25" font-family="Arial" font-size="11.00">current_gdp_dollars_thousands</text>
+<polygon fill="none" stroke="#7c5cc4" points="208.25,-907.25 208.25,-928.75 251.5,-928.75 251.5,-907.25 208.25,-907.25"/>
+<polygon fill="none" stroke="#7c5cc4" points="1,-885.75 1,-907.25 35.25,-907.25 35.25,-885.75 1,-885.75"/>
+<text xml:space="preserve" text-anchor="start" x="5" y="-892.75" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="35.25,-885.75 35.25,-907.25 208.25,-907.25 208.25,-885.75 35.25,-885.75"/>
+<text xml:space="preserve" text-anchor="start" x="39.25" y="-892.75" font-family="Arial" font-size="11.00">quantity_index_gdp</text>
+<polygon fill="none" stroke="#7c5cc4" points="208.25,-885.75 208.25,-907.25 251.5,-907.25 251.5,-885.75 208.25,-885.75"/>
+</g>
+<!-- us_counties&#45;&gt;gdp -->
+<g id="edge25" class="edge">
+<title>us_counties-&gt;gdp</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M262.27,-928C258.95,-928 255.59,-928 252.2,-928"/>
+</g>
+<!-- res_construction_permits -->
+<g id="node5" class="node">
+<title>res_construction_permits</title>
+<polygon fill="none" stroke="#7c5cc4" points="59.25,-437 59.25,-632.5 325.25,-632.5 325.25,-437 59.25,-437"/>
+<polygon fill="#e7dcff" stroke="none" points="60.25,-610 60.25,-631.5 324.25,-631.5 324.25,-610 60.25,-610"/>
+<polygon fill="none" stroke="#7c5cc4" points="60.25,-610 60.25,-631.5 324.25,-631.5 324.25,-610 60.25,-610"/>
+<text xml:space="preserve" text-anchor="start" x="124.75" y="-618.05" font-family="Arial" font-weight="bold" font-size="11.00">res_construction_permits</text>
+<polygon fill="none" stroke="#7c5cc4" points="60.25,-588.5 60.25,-610 94.5,-610 94.5,-588.5 60.25,-588.5"/>
+<text xml:space="preserve" text-anchor="start" x="64.25" y="-595.5" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="94.5,-588.5 94.5,-610 281,-610 281,-588.5 94.5,-588.5"/>
+<text xml:space="preserve" text-anchor="start" x="98.5" y="-595.5" font-family="Arial" font-size="11.00">year</text>
+<polygon fill="none" stroke="#7c5cc4" points="281,-588.5 281,-610 324.25,-610 324.25,-588.5 281,-588.5"/>
+<text xml:space="preserve" text-anchor="start" x="285" y="-595.5" font-family="Arial" font-size="11.00">PK</text>
+<polygon fill="none" stroke="#7c5cc4" points="60.25,-567 60.25,-588.5 94.5,-588.5 94.5,-567 60.25,-567"/>
+<text xml:space="preserve" text-anchor="start" x="64.25" y="-574" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="94.5,-567 94.5,-588.5 281,-588.5 281,-567 94.5,-567"/>
+<text xml:space="preserve" text-anchor="start" x="98.5" y="-574" font-family="Arial" font-size="11.00">county_id</text>
+<polygon fill="none" stroke="#7c5cc4" points="281,-567 281,-588.5 324.25,-588.5 324.25,-567 281,-567"/>
+<text xml:space="preserve" text-anchor="start" x="285" y="-574" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="60.25,-545.5 60.25,-567 94.5,-567 94.5,-545.5 60.25,-545.5"/>
+<text xml:space="preserve" text-anchor="start" x="64.25" y="-552.5" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="94.5,-545.5 94.5,-567 281,-567 281,-545.5 94.5,-545.5"/>
+<text xml:space="preserve" text-anchor="start" x="98.5" y="-552.5" font-family="Arial" font-size="11.00">all_permits</text>
+<polygon fill="none" stroke="#7c5cc4" points="281,-545.5 281,-567 324.25,-567 324.25,-545.5 281,-545.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="60.25,-524 60.25,-545.5 94.5,-545.5 94.5,-524 60.25,-524"/>
+<text xml:space="preserve" text-anchor="start" x="64.25" y="-531" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="94.5,-524 94.5,-545.5 281,-545.5 281,-524 94.5,-524"/>
+<text xml:space="preserve" text-anchor="start" x="98.5" y="-531" font-family="Arial" font-size="11.00">single_family_permits</text>
+<polygon fill="none" stroke="#7c5cc4" points="281,-524 281,-545.5 324.25,-545.5 324.25,-524 281,-524"/>
+<polygon fill="none" stroke="#7c5cc4" points="60.25,-502.5 60.25,-524 94.5,-524 94.5,-502.5 60.25,-502.5"/>
+<text xml:space="preserve" text-anchor="start" x="64.25" y="-509.5" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="94.5,-502.5 94.5,-524 281,-524 281,-502.5 94.5,-502.5"/>
+<text xml:space="preserve" text-anchor="start" x="98.5" y="-509.5" font-family="Arial" font-size="11.00">all_multifamily_permits</text>
+<polygon fill="none" stroke="#7c5cc4" points="281,-502.5 281,-524 324.25,-524 324.25,-502.5 281,-502.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="60.25,-481 60.25,-502.5 94.5,-502.5 94.5,-481 60.25,-481"/>
+<text xml:space="preserve" text-anchor="start" x="64.25" y="-488" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="94.5,-481 94.5,-502.5 281,-502.5 281,-481 94.5,-481"/>
+<text xml:space="preserve" text-anchor="start" x="98.5" y="-488" font-family="Arial" font-size="11.00">multifamily_permits_2_units</text>
+<polygon fill="none" stroke="#7c5cc4" points="281,-481 281,-502.5 324.25,-502.5 324.25,-481 281,-481"/>
+<polygon fill="none" stroke="#7c5cc4" points="60.25,-459.5 60.25,-481 94.5,-481 94.5,-459.5 60.25,-459.5"/>
+<text xml:space="preserve" text-anchor="start" x="64.25" y="-466.5" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="94.5,-459.5 94.5,-481 281,-481 281,-459.5 94.5,-459.5"/>
+<text xml:space="preserve" text-anchor="start" x="98.5" y="-466.5" font-family="Arial" font-size="11.00">multifamily_permits_3_4_units</text>
+<polygon fill="none" stroke="#7c5cc4" points="281,-459.5 281,-481 324.25,-481 324.25,-459.5 281,-459.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="60.25,-438 60.25,-459.5 94.5,-459.5 94.5,-438 60.25,-438"/>
+<text xml:space="preserve" text-anchor="start" x="64.25" y="-445" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="94.5,-438 94.5,-459.5 281,-459.5 281,-438 94.5,-438"/>
+<text xml:space="preserve" text-anchor="start" x="98.5" y="-445" font-family="Arial" font-size="11.00">multifamily_permits_5_or_more_units</text>
+<polygon fill="none" stroke="#7c5cc4" points="281,-438 281,-459.5 324.25,-459.5 324.25,-438 281,-438"/>
+</g>
+<!-- us_counties&#45;&gt;res_construction_permits -->
+<g id="edge26" class="edge">
+<title>us_counties-&gt;res_construction_permits</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M319.92,-809.58C319.92,-751.31 319.92,-685.16 319.92,-632.35"/>
+</g>
+<!-- unemployment -->
+<g id="node6" class="node">
+<title>unemployment</title>
+<polygon fill="none" stroke="#7c5cc4" points="421.88,-874 421.88,-1026.5 604.62,-1026.5 604.62,-874 421.88,-874"/>
+<polygon fill="#e7dcff" stroke="none" points="422.88,-1004 422.88,-1025.5 603.62,-1025.5 603.62,-1004 422.88,-1004"/>
+<polygon fill="none" stroke="#7c5cc4" points="422.88,-1004 422.88,-1025.5 603.62,-1025.5 603.62,-1004 422.88,-1004"/>
+<text xml:space="preserve" text-anchor="start" x="474.25" y="-1012.05" font-family="Arial" font-weight="bold" font-size="11.00">unemployment</text>
+<polygon fill="none" stroke="#7c5cc4" points="422.88,-982.5 422.88,-1004 457.12,-1004 457.12,-982.5 422.88,-982.5"/>
+<text xml:space="preserve" text-anchor="start" x="426.88" y="-989.5" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="457.12,-982.5 457.12,-1004 560.38,-1004 560.38,-982.5 457.12,-982.5"/>
+<text xml:space="preserve" text-anchor="start" x="461.12" y="-989.5" font-family="Arial" font-size="11.00">year</text>
+<polygon fill="none" stroke="#7c5cc4" points="560.38,-982.5 560.38,-1004 603.62,-1004 603.62,-982.5 560.38,-982.5"/>
+<text xml:space="preserve" text-anchor="start" x="564.38" y="-989.5" font-family="Arial" font-size="11.00">PK</text>
+<polygon fill="none" stroke="#7c5cc4" points="422.88,-961 422.88,-982.5 457.12,-982.5 457.12,-961 422.88,-961"/>
+<text xml:space="preserve" text-anchor="start" x="426.88" y="-968" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="457.12,-961 457.12,-982.5 560.38,-982.5 560.38,-961 457.12,-961"/>
+<text xml:space="preserve" text-anchor="start" x="461.12" y="-968" font-family="Arial" font-size="11.00">county_id</text>
+<polygon fill="none" stroke="#7c5cc4" points="560.38,-961 560.38,-982.5 603.62,-982.5 603.62,-961 560.38,-961"/>
+<text xml:space="preserve" text-anchor="start" x="564.38" y="-968" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="422.88,-939.5 422.88,-961 457.12,-961 457.12,-939.5 422.88,-939.5"/>
+<text xml:space="preserve" text-anchor="start" x="426.88" y="-946.5" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="457.12,-939.5 457.12,-961 560.38,-961 560.38,-939.5 457.12,-939.5"/>
+<text xml:space="preserve" text-anchor="start" x="461.12" y="-946.5" font-family="Arial" font-size="11.00">civilian_labor_force</text>
+<polygon fill="none" stroke="#7c5cc4" points="560.38,-939.5 560.38,-961 603.62,-961 603.62,-939.5 560.38,-939.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="422.88,-918 422.88,-939.5 457.12,-939.5 457.12,-918 422.88,-918"/>
+<text xml:space="preserve" text-anchor="start" x="426.88" y="-925" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="457.12,-918 457.12,-939.5 560.38,-939.5 560.38,-918 457.12,-918"/>
+<text xml:space="preserve" text-anchor="start" x="461.12" y="-925" font-family="Arial" font-size="11.00">employed</text>
+<polygon fill="none" stroke="#7c5cc4" points="560.38,-918 560.38,-939.5 603.62,-939.5 603.62,-918 560.38,-918"/>
+<polygon fill="none" stroke="#7c5cc4" points="422.88,-896.5 422.88,-918 457.12,-918 457.12,-896.5 422.88,-896.5"/>
+<text xml:space="preserve" text-anchor="start" x="426.88" y="-903.5" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="457.12,-896.5 457.12,-918 560.38,-918 560.38,-896.5 457.12,-896.5"/>
+<text xml:space="preserve" text-anchor="start" x="461.12" y="-903.5" font-family="Arial" font-size="11.00">unemployed</text>
+<polygon fill="none" stroke="#7c5cc4" points="560.38,-896.5 560.38,-918 603.62,-918 603.62,-896.5 560.38,-896.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="422.88,-875 422.88,-896.5 457.12,-896.5 457.12,-875 422.88,-875"/>
+<text xml:space="preserve" text-anchor="start" x="426.88" y="-882" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="457.12,-875 457.12,-896.5 560.38,-896.5 560.38,-875 457.12,-875"/>
+<text xml:space="preserve" text-anchor="start" x="461.12" y="-882" font-family="Arial" font-size="11.00">unemployment_rate</text>
+<polygon fill="none" stroke="#7c5cc4" points="560.38,-875 560.38,-896.5 603.62,-896.5 603.62,-875 560.38,-875"/>
+</g>
+<!-- us_counties&#45;&gt;unemployment -->
+<!-- us_counties&#45;&gt;unemployment -->
+<g id="edge27" class="edge">
+<title>us_counties-&gt;unemployment</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M412.4,-976C415.58,-976 418.78,-976 421.98,-976"/>
+</g>
+<!-- air_quality -->
+<g id="node7" class="node">
+<title>air_quality</title>
+<polygon fill="none" stroke="#7c5cc4" points="400,-415.5 400,-654 598.5,-654 598.5,-415.5 400,-415.5"/>
+<polygon fill="#e7dcff" stroke="none" points="401,-631.5 401,-653 597.5,-653 597.5,-631.5 401,-631.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="401,-631.5 401,-653 597.5,-653 597.5,-631.5 401,-631.5"/>
+<text xml:space="preserve" text-anchor="start" x="471.88" y="-639.55" font-family="Arial" font-weight="bold" font-size="11.00">air_quality</text>
+<polygon fill="none" stroke="#7c5cc4" points="401,-610 401,-631.5 435.25,-631.5 435.25,-610 401,-610"/>
+<text xml:space="preserve" text-anchor="start" x="405" y="-617" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="435.25,-610 435.25,-631.5 554.25,-631.5 554.25,-610 435.25,-610"/>
+<text xml:space="preserve" text-anchor="start" x="439.25" y="-617" font-family="Arial" font-size="11.00">year</text>
+<polygon fill="none" stroke="#7c5cc4" points="554.25,-610 554.25,-631.5 597.5,-631.5 597.5,-610 554.25,-610"/>
+<text xml:space="preserve" text-anchor="start" x="558.25" y="-617" font-family="Arial" font-size="11.00">PK</text>
+<polygon fill="none" stroke="#7c5cc4" points="401,-588.5 401,-610 435.25,-610 435.25,-588.5 401,-588.5"/>
+<text xml:space="preserve" text-anchor="start" x="405" y="-595.5" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="435.25,-588.5 435.25,-610 554.25,-610 554.25,-588.5 435.25,-588.5"/>
+<text xml:space="preserve" text-anchor="start" x="439.25" y="-595.5" font-family="Arial" font-size="11.00">county_id</text>
+<polygon fill="none" stroke="#7c5cc4" points="554.25,-588.5 554.25,-610 597.5,-610 597.5,-588.5 554.25,-588.5"/>
+<text xml:space="preserve" text-anchor="start" x="558.25" y="-595.5" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="401,-567 401,-588.5 435.25,-588.5 435.25,-567 401,-567"/>
+<text xml:space="preserve" text-anchor="start" x="405" y="-574" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="435.25,-567 435.25,-588.5 554.25,-588.5 554.25,-567 435.25,-567"/>
+<text xml:space="preserve" text-anchor="start" x="439.25" y="-574" font-family="Arial" font-size="11.00">pm25_max_sd</text>
+<polygon fill="none" stroke="#7c5cc4" points="554.25,-567 554.25,-588.5 597.5,-588.5 597.5,-567 554.25,-567"/>
+<polygon fill="none" stroke="#7c5cc4" points="401,-545.5 401,-567 435.25,-567 435.25,-545.5 401,-545.5"/>
+<text xml:space="preserve" text-anchor="start" x="405" y="-552.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="435.25,-545.5 435.25,-567 554.25,-567 554.25,-545.5 435.25,-545.5"/>
+<text xml:space="preserve" text-anchor="start" x="439.25" y="-552.5" font-family="Arial" font-size="11.00">pm25_med_sd</text>
+<polygon fill="none" stroke="#7c5cc4" points="554.25,-545.5 554.25,-567 597.5,-567 597.5,-545.5 554.25,-545.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="401,-524 401,-545.5 435.25,-545.5 435.25,-524 401,-524"/>
+<text xml:space="preserve" text-anchor="start" x="405" y="-531" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="435.25,-524 435.25,-545.5 554.25,-545.5 554.25,-524 435.25,-524"/>
+<text xml:space="preserve" text-anchor="start" x="439.25" y="-531" font-family="Arial" font-size="11.00">pm25_mean_sd</text>
+<polygon fill="none" stroke="#7c5cc4" points="554.25,-524 554.25,-545.5 597.5,-545.5 597.5,-524 554.25,-524"/>
+<polygon fill="none" stroke="#7c5cc4" points="401,-502.5 401,-524 435.25,-524 435.25,-502.5 401,-502.5"/>
+<text xml:space="preserve" text-anchor="start" x="405" y="-509.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="435.25,-502.5 435.25,-524 554.25,-524 554.25,-502.5 435.25,-502.5"/>
+<text xml:space="preserve" text-anchor="start" x="439.25" y="-509.5" font-family="Arial" font-size="11.00">pm25_pop_sd</text>
+<polygon fill="none" stroke="#7c5cc4" points="554.25,-502.5 554.25,-524 597.5,-524 597.5,-502.5 554.25,-502.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="401,-481 401,-502.5 435.25,-502.5 435.25,-481 401,-481"/>
+<text xml:space="preserve" text-anchor="start" x="405" y="-488" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="435.25,-481 435.25,-502.5 554.25,-502.5 554.25,-481 435.25,-481"/>
+<text xml:space="preserve" text-anchor="start" x="439.25" y="-488" font-family="Arial" font-size="11.00">pm25_max_daily_avg</text>
+<polygon fill="none" stroke="#7c5cc4" points="554.25,-481 554.25,-502.5 597.5,-502.5 597.5,-481 554.25,-481"/>
+<polygon fill="none" stroke="#7c5cc4" points="401,-459.5 401,-481 435.25,-481 435.25,-459.5 401,-459.5"/>
+<text xml:space="preserve" text-anchor="start" x="405" y="-466.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="435.25,-459.5 435.25,-481 554.25,-481 554.25,-459.5 435.25,-459.5"/>
+<text xml:space="preserve" text-anchor="start" x="439.25" y="-466.5" font-family="Arial" font-size="11.00">pm25_med_daily_avg</text>
+<polygon fill="none" stroke="#7c5cc4" points="554.25,-459.5 554.25,-481 597.5,-481 597.5,-459.5 554.25,-459.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="401,-438 401,-459.5 435.25,-459.5 435.25,-438 401,-438"/>
+<text xml:space="preserve" text-anchor="start" x="405" y="-445" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="435.25,-438 435.25,-459.5 554.25,-459.5 554.25,-438 435.25,-438"/>
+<text xml:space="preserve" text-anchor="start" x="439.25" y="-445" font-family="Arial" font-size="11.00">pm25_mean_daily_avg</text>
+<polygon fill="none" stroke="#7c5cc4" points="554.25,-438 554.25,-459.5 597.5,-459.5 597.5,-438 554.25,-438"/>
+<polygon fill="none" stroke="#7c5cc4" points="401,-416.5 401,-438 435.25,-438 435.25,-416.5 401,-416.5"/>
+<text xml:space="preserve" text-anchor="start" x="405" y="-423.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="435.25,-416.5 435.25,-438 554.25,-438 554.25,-416.5 435.25,-416.5"/>
+<text xml:space="preserve" text-anchor="start" x="439.25" y="-423.5" font-family="Arial" font-size="11.00">pm25_pop_daily_avg</text>
+<polygon fill="none" stroke="#7c5cc4" points="554.25,-416.5 554.25,-438 597.5,-438 597.5,-416.5 554.25,-416.5"/>
+</g>
+<!-- us_counties&#45;&gt;air_quality -->
+<g id="edge28" class="edge">
+<title>us_counties-&gt;air_quality</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M370.55,-809.66C370.55,-728.76 370.55,-643 370.55,-643 370.55,-643 382.96,-643 400.08,-643"/>
+</g>
+<!-- naics_518_establishments -->
+<g id="node8" class="node">
+<title>naics_518_establishments</title>
+<polygon fill="none" stroke="#7c5cc4" points="118.62,-261.5 118.62,-349.5 265.88,-349.5 265.88,-261.5 118.62,-261.5"/>
+<polygon fill="#e7dcff" stroke="none" points="119.62,-327 119.62,-348.5 264.88,-348.5 264.88,-327 119.62,-327"/>
+<polygon fill="none" stroke="#7c5cc4" points="119.62,-327 119.62,-348.5 264.88,-348.5 264.88,-327 119.62,-327"/>
+<text xml:space="preserve" text-anchor="start" x="123.62" y="-335.05" font-family="Arial" font-weight="bold" font-size="11.00">naics_518_establishments</text>
+<polygon fill="none" stroke="#7c5cc4" points="119.62,-305.5 119.62,-327 158.54,-327 158.54,-305.5 119.62,-305.5"/>
+<text xml:space="preserve" text-anchor="start" x="123.62" y="-312.5" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="158.54,-305.5 158.54,-327 216.96,-327 216.96,-305.5 158.54,-305.5"/>
+<text xml:space="preserve" text-anchor="start" x="162.54" y="-312.5" font-family="Arial" font-size="11.00">county_id</text>
+<polygon fill="none" stroke="#7c5cc4" points="216.96,-305.5 216.96,-327 264.88,-327 264.88,-305.5 216.96,-305.5"/>
+<text xml:space="preserve" text-anchor="start" x="220.96" y="-312.5" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="119.62,-284 119.62,-305.5 158.54,-305.5 158.54,-284 119.62,-284"/>
+<text xml:space="preserve" text-anchor="start" x="123.62" y="-291" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="158.54,-284 158.54,-305.5 216.96,-305.5 216.96,-284 158.54,-284"/>
+<text xml:space="preserve" text-anchor="start" x="162.54" y="-291" font-family="Arial" font-size="11.00">year</text>
+<polygon fill="none" stroke="#7c5cc4" points="216.96,-284 216.96,-305.5 264.88,-305.5 264.88,-284 216.96,-284"/>
+<polygon fill="none" stroke="#7c5cc4" points="119.62,-262.5 119.62,-284 158.54,-284 158.54,-262.5 119.62,-262.5"/>
+<text xml:space="preserve" text-anchor="start" x="123.62" y="-269.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="158.54,-262.5 158.54,-284 216.96,-284 216.96,-262.5 158.54,-262.5"/>
+<text xml:space="preserve" text-anchor="start" x="162.54" y="-269.5" font-family="Arial" font-size="11.00">estabs</text>
+<polygon fill="none" stroke="#7c5cc4" points="216.96,-262.5 216.96,-284 264.88,-284 264.88,-262.5 216.96,-262.5"/>
+</g>
+<!-- us_counties&#45;&gt;naics_518_establishments -->
+<g id="edge29" class="edge">
+<title>us_counties-&gt;naics_518_establishments</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M338.75,-809.83C338.75,-626.3 338.75,-328 338.75,-328 338.75,-328 302.12,-328 265.5,-328"/>
+</g>
+<!-- business_patterns -->
+<g id="node9" class="node">
+<title>business_patterns</title>
+<polygon fill="none" stroke="#7c5cc4" points="251.38,-21.5 251.38,-174 455.12,-174 455.12,-21.5 251.38,-21.5"/>
+<polygon fill="#e7dcff" stroke="none" points="252.38,-151.5 252.38,-173 454.12,-173 454.12,-151.5 252.38,-151.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="252.38,-151.5 252.38,-173 454.12,-173 454.12,-151.5 252.38,-151.5"/>
+<text xml:space="preserve" text-anchor="start" x="304.88" y="-159.55" font-family="Arial" font-weight="bold" font-size="11.00">business_patterns</text>
+<polygon fill="none" stroke="#7c5cc4" points="252.38,-130 252.38,-151.5 286.62,-151.5 286.62,-130 252.38,-130"/>
+<text xml:space="preserve" text-anchor="start" x="256.38" y="-137" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="286.62,-130 286.62,-151.5 410.88,-151.5 410.88,-130 286.62,-130"/>
+<text xml:space="preserve" text-anchor="start" x="290.62" y="-137" font-family="Arial" font-size="11.00">year</text>
+<polygon fill="none" stroke="#7c5cc4" points="410.88,-130 410.88,-151.5 454.12,-151.5 454.12,-130 410.88,-130"/>
+<text xml:space="preserve" text-anchor="start" x="414.88" y="-137" font-family="Arial" font-size="11.00">PK</text>
+<polygon fill="none" stroke="#7c5cc4" points="252.38,-108.5 252.38,-130 286.62,-130 286.62,-108.5 252.38,-108.5"/>
+<text xml:space="preserve" text-anchor="start" x="256.38" y="-115.5" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="286.62,-108.5 286.62,-130 410.88,-130 410.88,-108.5 286.62,-108.5"/>
+<text xml:space="preserve" text-anchor="start" x="290.62" y="-115.5" font-family="Arial" font-size="11.00">naics_industry_code</text>
+<polygon fill="none" stroke="#7c5cc4" points="410.88,-108.5 410.88,-130 454.12,-130 454.12,-108.5 410.88,-108.5"/>
+<text xml:space="preserve" text-anchor="start" x="414.88" y="-115.5" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="252.38,-87 252.38,-108.5 286.62,-108.5 286.62,-87 252.38,-87"/>
+<text xml:space="preserve" text-anchor="start" x="256.38" y="-94" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="286.62,-87 286.62,-108.5 410.88,-108.5 410.88,-87 286.62,-87"/>
+<text xml:space="preserve" text-anchor="start" x="290.62" y="-94" font-family="Arial" font-size="11.00">county_id</text>
+<polygon fill="none" stroke="#7c5cc4" points="410.88,-87 410.88,-108.5 454.12,-108.5 454.12,-87 410.88,-87"/>
+<text xml:space="preserve" text-anchor="start" x="414.88" y="-94" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="252.38,-65.5 252.38,-87 286.62,-87 286.62,-65.5 252.38,-65.5"/>
+<text xml:space="preserve" text-anchor="start" x="256.38" y="-72.5" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="286.62,-65.5 286.62,-87 410.88,-87 410.88,-65.5 286.62,-65.5"/>
+<text xml:space="preserve" text-anchor="start" x="290.62" y="-72.5" font-family="Arial" font-size="11.00">tot_employee_count</text>
+<polygon fill="none" stroke="#7c5cc4" points="410.88,-65.5 410.88,-87 454.12,-87 454.12,-65.5 410.88,-65.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="252.38,-44 252.38,-65.5 286.62,-65.5 286.62,-44 252.38,-44"/>
+<text xml:space="preserve" text-anchor="start" x="256.38" y="-51" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="286.62,-44 286.62,-65.5 410.88,-65.5 410.88,-44 286.62,-44"/>
+<text xml:space="preserve" text-anchor="start" x="290.62" y="-51" font-family="Arial" font-size="11.00">annual_payroll</text>
+<polygon fill="none" stroke="#7c5cc4" points="410.88,-44 410.88,-65.5 454.12,-65.5 454.12,-44 410.88,-44"/>
+<polygon fill="none" stroke="#7c5cc4" points="252.38,-22.5 252.38,-44 286.62,-44 286.62,-22.5 252.38,-22.5"/>
+<text xml:space="preserve" text-anchor="start" x="256.38" y="-29.5" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="286.62,-22.5 286.62,-44 410.88,-44 410.88,-22.5 286.62,-22.5"/>
+<text xml:space="preserve" text-anchor="start" x="290.62" y="-29.5" font-family="Arial" font-size="11.00">tot_establishment_count</text>
+<polygon fill="none" stroke="#7c5cc4" points="410.88,-22.5 410.88,-44 454.12,-44 454.12,-22.5 410.88,-22.5"/>
+</g>
+<!-- us_counties&#45;&gt;business_patterns -->
+<g id="edge30" class="edge">
+<title>us_counties-&gt;business_patterns</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M358.32,-809.95C358.32,-627.99 358.32,-316.98 358.32,-173.88"/>
+</g>
+<!-- county_distances_lookup -->
+<g id="node11" class="node">
+<title>county_distances_lookup</title>
+<polygon fill="none" stroke="#7c5cc4" points="420.25,-218.5 420.25,-392.5 578.25,-392.5 578.25,-218.5 420.25,-218.5"/>
+<polygon fill="#e7dcff" stroke="none" points="421.25,-370 421.25,-391.5 577.25,-391.5 577.25,-370 421.25,-370"/>
+<polygon fill="none" stroke="#7c5cc4" points="421.25,-370 421.25,-391.5 577.25,-391.5 577.25,-370 421.25,-370"/>
+<text xml:space="preserve" text-anchor="start" x="432.12" y="-378.05" font-family="Arial" font-weight="bold" font-size="11.00">county_distances_lookup</text>
+<polygon fill="none" stroke="#7c5cc4" points="421.25,-348.5 421.25,-370 455.5,-370 455.5,-348.5 421.25,-348.5"/>
+<text xml:space="preserve" text-anchor="start" x="425.25" y="-355.5" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="455.5,-348.5 455.5,-370 534,-370 534,-348.5 455.5,-348.5"/>
+<text xml:space="preserve" text-anchor="start" x="459.5" y="-355.5" font-family="Arial" font-size="11.00">county_id_2</text>
+<polygon fill="none" stroke="#7c5cc4" points="534,-348.5 534,-370 577.25,-370 577.25,-348.5 534,-348.5"/>
+<text xml:space="preserve" text-anchor="start" x="538" y="-355.5" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="421.25,-327 421.25,-348.5 455.5,-348.5 455.5,-327 421.25,-327"/>
+<text xml:space="preserve" text-anchor="start" x="425.25" y="-334" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="455.5,-327 455.5,-348.5 534,-348.5 534,-327 455.5,-327"/>
+<text xml:space="preserve" text-anchor="start" x="459.5" y="-334" font-family="Arial" font-size="11.00">county_id</text>
+<polygon fill="none" stroke="#7c5cc4" points="534,-327 534,-348.5 577.25,-348.5 577.25,-327 534,-327"/>
+<text xml:space="preserve" text-anchor="start" x="538" y="-334" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="421.25,-305.5 421.25,-327 455.5,-327 455.5,-305.5 421.25,-305.5"/>
+<text xml:space="preserve" text-anchor="start" x="425.25" y="-312.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="455.5,-305.5 455.5,-327 534,-327 534,-305.5 455.5,-305.5"/>
+<text xml:space="preserve" text-anchor="start" x="459.5" y="-312.5" font-family="Arial" font-size="11.00">centroid_lon</text>
+<polygon fill="none" stroke="#7c5cc4" points="534,-305.5 534,-327 577.25,-327 577.25,-305.5 534,-305.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="421.25,-284 421.25,-305.5 455.5,-305.5 455.5,-284 421.25,-284"/>
+<text xml:space="preserve" text-anchor="start" x="425.25" y="-291" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="455.5,-284 455.5,-305.5 534,-305.5 534,-284 455.5,-284"/>
+<text xml:space="preserve" text-anchor="start" x="459.5" y="-291" font-family="Arial" font-size="11.00">centroid_lat</text>
+<polygon fill="none" stroke="#7c5cc4" points="534,-284 534,-305.5 577.25,-305.5 577.25,-284 534,-284"/>
+<polygon fill="none" stroke="#7c5cc4" points="421.25,-262.5 421.25,-284 455.5,-284 455.5,-262.5 421.25,-262.5"/>
+<text xml:space="preserve" text-anchor="start" x="425.25" y="-269.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="455.5,-262.5 455.5,-284 534,-284 534,-262.5 455.5,-262.5"/>
+<text xml:space="preserve" text-anchor="start" x="459.5" y="-269.5" font-family="Arial" font-size="11.00">centroid_lon_2</text>
+<polygon fill="none" stroke="#7c5cc4" points="534,-262.5 534,-284 577.25,-284 577.25,-262.5 534,-262.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="421.25,-241 421.25,-262.5 455.5,-262.5 455.5,-241 421.25,-241"/>
+<text xml:space="preserve" text-anchor="start" x="425.25" y="-248" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="455.5,-241 455.5,-262.5 534,-262.5 534,-241 455.5,-241"/>
+<text xml:space="preserve" text-anchor="start" x="459.5" y="-248" font-family="Arial" font-size="11.00">centroid_lat_2</text>
+<polygon fill="none" stroke="#7c5cc4" points="534,-241 534,-262.5 577.25,-262.5 577.25,-241 534,-241"/>
+<polygon fill="none" stroke="#7c5cc4" points="421.25,-219.5 421.25,-241 455.5,-241 455.5,-219.5 421.25,-219.5"/>
+<text xml:space="preserve" text-anchor="start" x="425.25" y="-226.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="455.5,-219.5 455.5,-241 534,-241 534,-219.5 455.5,-219.5"/>
+<text xml:space="preserve" text-anchor="start" x="459.5" y="-226.5" font-family="Arial" font-size="11.00">distance_miles</text>
+<polygon fill="none" stroke="#7c5cc4" points="534,-219.5 534,-241 577.25,-241 577.25,-219.5 534,-219.5"/>
+</g>
+<!-- us_counties&#45;&gt;county_distances_lookup -->
+<g id="edge31" class="edge">
+<title>us_counties-&gt;county_distances_lookup</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M366.48,-809.66C366.48,-638.21 366.48,-371 366.48,-371 366.48,-371 391.89,-371 420.48,-371"/>
+</g>
+<!-- naics_518_nearby_estabs_50mi -->
+<g id="node12" class="node">
+<title>naics_518_nearby_estabs_50mi</title>
+<polygon fill="none" stroke="#7c5cc4" points="464.5,0 464.5,-195.5 726,-195.5 726,0 464.5,0"/>
+<polygon fill="#e7dcff" stroke="none" points="465.5,-173 465.5,-194.5 725,-194.5 725,-173 465.5,-173"/>
+<polygon fill="none" stroke="#7c5cc4" points="465.5,-173 465.5,-194.5 725,-194.5 725,-173 465.5,-173"/>
+<text xml:space="preserve" text-anchor="start" x="512.75" y="-181.05" font-family="Arial" font-weight="bold" font-size="11.00">naics_518_nearby_estabs_50mi</text>
+<polygon fill="none" stroke="#7c5cc4" points="465.5,-151.5 465.5,-173 499.75,-173 499.75,-151.5 465.5,-151.5"/>
+<text xml:space="preserve" text-anchor="start" x="469.5" y="-158.5" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="499.75,-151.5 499.75,-173 681.75,-173 681.75,-151.5 499.75,-151.5"/>
+<text xml:space="preserve" text-anchor="start" x="503.75" y="-158.5" font-family="Arial" font-size="11.00">year</text>
+<polygon fill="none" stroke="#7c5cc4" points="681.75,-151.5 681.75,-173 725,-173 725,-151.5 681.75,-151.5"/>
+<text xml:space="preserve" text-anchor="start" x="685.75" y="-158.5" font-family="Arial" font-size="11.00">PK</text>
+<polygon fill="none" stroke="#7c5cc4" points="465.5,-130 465.5,-151.5 499.75,-151.5 499.75,-130 465.5,-130"/>
+<text xml:space="preserve" text-anchor="start" x="469.5" y="-137" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="499.75,-130 499.75,-151.5 681.75,-151.5 681.75,-130 499.75,-130"/>
+<text xml:space="preserve" text-anchor="start" x="503.75" y="-137" font-family="Arial" font-size="11.00">county_id</text>
+<polygon fill="none" stroke="#7c5cc4" points="681.75,-130 681.75,-151.5 725,-151.5 725,-130 681.75,-130"/>
+<text xml:space="preserve" text-anchor="start" x="685.75" y="-137" font-family="Arial" font-size="11.00">PK, FK</text>
+<polygon fill="none" stroke="#7c5cc4" points="465.5,-108.5 465.5,-130 499.75,-130 499.75,-108.5 465.5,-108.5"/>
+<text xml:space="preserve" text-anchor="start" x="469.5" y="-115.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="499.75,-108.5 499.75,-130 681.75,-130 681.75,-108.5 499.75,-108.5"/>
+<text xml:space="preserve" text-anchor="start" x="503.75" y="-115.5" font-family="Arial" font-size="11.00">nearby_estabs_50mi_landadj</text>
+<polygon fill="none" stroke="#7c5cc4" points="681.75,-108.5 681.75,-130 725,-130 725,-108.5 681.75,-108.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="465.5,-87 465.5,-108.5 499.75,-108.5 499.75,-87 465.5,-87"/>
+<text xml:space="preserve" text-anchor="start" x="469.5" y="-94" font-family="Arial" font-size="11.00">int</text>
+<polygon fill="none" stroke="#7c5cc4" points="499.75,-87 499.75,-108.5 681.75,-108.5 681.75,-87 499.75,-87"/>
+<text xml:space="preserve" text-anchor="start" x="503.75" y="-94" font-family="Arial" font-size="11.00">contributing_counties_50mi</text>
+<polygon fill="none" stroke="#7c5cc4" points="681.75,-87 681.75,-108.5 725,-108.5 725,-87 681.75,-87"/>
+<polygon fill="none" stroke="#7c5cc4" points="465.5,-65.5 465.5,-87 499.75,-87 499.75,-65.5 465.5,-65.5"/>
+<text xml:space="preserve" text-anchor="start" x="469.5" y="-72.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="499.75,-65.5 499.75,-87 681.75,-87 681.75,-65.5 499.75,-65.5"/>
+<text xml:space="preserve" text-anchor="start" x="503.75" y="-72.5" font-family="Arial" font-size="11.00">raw_overlap_sqmi_50mi</text>
+<polygon fill="none" stroke="#7c5cc4" points="681.75,-65.5 681.75,-87 725,-87 725,-65.5 681.75,-65.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="465.5,-44 465.5,-65.5 499.75,-65.5 499.75,-44 465.5,-44"/>
+<text xml:space="preserve" text-anchor="start" x="469.5" y="-51" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="499.75,-44 499.75,-65.5 681.75,-65.5 681.75,-44 499.75,-44"/>
+<text xml:space="preserve" text-anchor="start" x="503.75" y="-51" font-family="Arial" font-size="11.00">effective_land_overlap_sqmi_50mi</text>
+<polygon fill="none" stroke="#7c5cc4" points="681.75,-44 681.75,-65.5 725,-65.5 725,-44 681.75,-44"/>
+<polygon fill="none" stroke="#7c5cc4" points="465.5,-22.5 465.5,-44 499.75,-44 499.75,-22.5 465.5,-22.5"/>
+<text xml:space="preserve" text-anchor="start" x="469.5" y="-29.5" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="499.75,-22.5 499.75,-44 681.75,-44 681.75,-22.5 499.75,-22.5"/>
+<text xml:space="preserve" text-anchor="start" x="503.75" y="-29.5" font-family="Arial" font-size="11.00">nearby_estabs_50mi_per_sqmi</text>
+<polygon fill="none" stroke="#7c5cc4" points="681.75,-22.5 681.75,-44 725,-44 725,-22.5 681.75,-22.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="465.5,-1 465.5,-22.5 499.75,-22.5 499.75,-1 465.5,-1"/>
+<text xml:space="preserve" text-anchor="start" x="469.5" y="-8" font-family="Arial" font-size="11.00">float</text>
+<polygon fill="none" stroke="#7c5cc4" points="499.75,-1 499.75,-22.5 681.75,-22.5 681.75,-1 499.75,-1"/>
+<text xml:space="preserve" text-anchor="start" x="503.75" y="-8" font-family="Arial" font-size="11.00">nearby_estabs_50mi_per_100_sqmi</text>
+<polygon fill="none" stroke="#7c5cc4" points="681.75,-1 681.75,-22.5 725,-22.5 725,-1 681.75,-1"/>
+</g>
+<!-- us_counties&#45;&gt;naics_518_nearby_estabs_50mi -->
+<g id="edge32" class="edge">
+<title>us_counties-&gt;naics_518_nearby_estabs_50mi</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M362.4,-809.55C362.4,-589.31 362.4,-188 362.4,-188 362.4,-188 411.45,-188 464.53,-188"/>
+</g>
+<!-- C1 -->
+<!-- us_counties&#45;&gt;C1 -->
+<!-- population&#45;&gt;res_construction_permits -->
+<!-- population&#45;&gt;C1 -->
+<!-- personal_income&#45;&gt;air_quality -->
+<!-- gdp&#45;&gt;us_counties -->
+<!-- gdp&#45;&gt;population -->
+<!-- res_construction_permits&#45;&gt;naics_518_establishments -->
+<!-- C2 -->
+<!-- res_construction_permits&#45;&gt;C2 -->
+<!-- unemployment&#45;&gt;personal_income -->
+<!-- air_quality&#45;&gt;county_distances_lookup -->
+<!-- naics_code_look_up -->
+<g id="node10" class="node">
+<title>naics_code_look_up</title>
+<polygon fill="none" stroke="#7c5cc4" points="124.62,-64.5 124.62,-131 241.88,-131 241.88,-64.5 124.62,-64.5"/>
+<polygon fill="#e7dcff" stroke="none" points="125.62,-108.5 125.62,-130 240.88,-130 240.88,-108.5 125.62,-108.5"/>
+<polygon fill="none" stroke="#7c5cc4" points="125.62,-108.5 125.62,-130 240.88,-130 240.88,-108.5 125.62,-108.5"/>
+<text xml:space="preserve" text-anchor="start" x="129.62" y="-116.55" font-family="Arial" font-weight="bold" font-size="11.00">naics_code_look_up</text>
+<polygon fill="none" stroke="#7c5cc4" points="125.62,-87 125.62,-108.5 162.29,-108.5 162.29,-87 125.62,-87"/>
+<text xml:space="preserve" text-anchor="start" x="129.62" y="-94" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="162.29,-87 162.29,-108.5 215.46,-108.5 215.46,-87 162.29,-87"/>
+<text xml:space="preserve" text-anchor="start" x="166.29" y="-94" font-family="Arial" font-size="11.00">sector</text>
+<polygon fill="none" stroke="#7c5cc4" points="215.46,-87 215.46,-108.5 240.88,-108.5 240.88,-87 215.46,-87"/>
+<text xml:space="preserve" text-anchor="start" x="219.46" y="-94" font-family="Arial" font-size="11.00">PK</text>
+<polygon fill="none" stroke="#7c5cc4" points="125.62,-65.5 125.62,-87 162.29,-87 162.29,-65.5 125.62,-65.5"/>
+<text xml:space="preserve" text-anchor="start" x="129.62" y="-72.5" font-family="Arial" font-size="11.00">string</text>
+<polygon fill="none" stroke="#7c5cc4" points="162.29,-65.5 162.29,-87 215.46,-87 215.46,-65.5 162.29,-65.5"/>
+<text xml:space="preserve" text-anchor="start" x="166.29" y="-72.5" font-family="Arial" font-size="11.00">definition</text>
+<polygon fill="none" stroke="#7c5cc4" points="215.46,-65.5 215.46,-87 240.88,-87 240.88,-65.5 215.46,-65.5"/>
+</g>
+<!-- naics_518_establishments&#45;&gt;naics_code_look_up -->
+<!-- naics_518_establishments&#45;&gt;naics_518_nearby_estabs_50mi -->
+<g id="edge34" class="edge">
+<title>naics_518_establishments-&gt;naics_518_nearby_estabs_50mi</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M258.62,-261.61C258.62,-225.76 258.62,-181 258.62,-181 258.62,-181 370,-181 464.62,-181"/>
+</g>
+<!-- C3 -->
+<!-- naics_518_establishments&#45;&gt;C3 -->
+<!-- business_patterns&#45;&gt;naics_518_nearby_estabs_50mi -->
+<!-- naics_code_look_up&#45;&gt;business_patterns -->
+<!-- naics_code_look_up&#45;&gt;business_patterns -->
+<g id="edge33" class="edge">
+<title>naics_code_look_up-&gt;business_patterns</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M241.75,-87C244.92,-87 248.15,-87 251.41,-87"/>
+</g>
+<!-- county_distances_lookup&#45;&gt;naics_518_nearby_estabs_50mi -->
+<!-- county_distances_lookup&#45;&gt;naics_518_nearby_estabs_50mi -->
+<g id="edge35" class="edge">
+<title>county_distances_lookup-&gt;naics_518_nearby_estabs_50mi</title>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M502.42,-218.6C502.42,-210.93 502.42,-203.13 502.42,-195.38"/>
+</g>
+<!-- C1&#45;&gt;personal_income -->
+<!-- C1&#45;&gt;C2 -->
+<!-- C2&#45;&gt;air_quality -->
+<!-- C2&#45;&gt;C3 -->
+<!-- C3&#45;&gt;business_patterns -->
+<!-- C3&#45;&gt;county_distances_lookup -->
+<!-- C4 -->
+</g>
+</svg>

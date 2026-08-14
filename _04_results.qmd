@@ -10,6 +10,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import duckdb
 import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap, BoundaryNorm
 import numpy as np
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
@@ -256,15 +257,15 @@ plt.show()
 With the PCA model fit, we use K-means clustering to separate the data into two groups. The resulting groups appear to separate rural from urban and suburban counties. @tbl-cluster-summary shows the mean characteristics of these groups for a small set of features. @fig-cluster-map shows how these clusters are distributed across the contiguous United States.
 
 ::: {#tbl-cluster-summary}
-Table: Cluster-level summary statistics for county population, land area, unemployment, data center count, and log personal income.
+Table: Mean values for county population, land area, unemployment, data centers (NAICS 518 establishments), and personal income by cluster. Values are reported in rounded original, untransformed units.
 
-| Mean Characteristic   | Cluster 0 | Cluster 1 |
-|:----------------------|----------:|----------:|
-| Log Population       | 9.524     | 11.123    |
-| Land Area            | 6.269     | 6.787     |
-| Unemployment Rate    | 5.970     | 6.202     |
-| Data Center Count    | 1.348     | 10.411    |
-| Log Personal Income  | 3.630     | 3.709     |
+| Mean characteristic          | Cluster 0 (More Rural) | Cluster 1 (More Urban) |
+|:-----------------------------|-----------------------:|-----------------------:|
+| Population (people)          |                 13,684 |                 67,711 |
+| Land area (square miles)     |                    528 |                    886 |
+| Unemployment rate (percent)  |                   5.97 |                   6.20 |
+| Data Centers (count)         |                   1.35 |                  10.41 |
+| Personal income (dollars)    |                $37,713 |                $40,813 |
 :::
 
 
@@ -394,6 +395,9 @@ with open(geojson_path, "r") as f:
 ```{python}
 #| label: fig-cluster-map
 #| fig-cap: "Map of U.S. counties grouped into two clusters based on non-treatment county characteristics, illustrating the rural-urban split used in subsequent analysis."
+#| out-width: 100%
+#| fig-align: center
+#| 
 combined_df = pd.concat(
     [
         cluster_0_df[["county_id"]].assign(cluster=0),
@@ -402,7 +406,7 @@ combined_df = pd.concat(
     ignore_index=True,
 )
 
-eda_table_name = "Counties Colored By Cluster"
+eda_table_name = "Contiguous U.S. counties by cluster assignment"
 cols_to_use = ["cluster"]
 
 cluster_labels = {
@@ -445,7 +449,7 @@ for i in cols_to_use:
             y=0.98,
             yanchor="top",
             pad=dict(t=0, b=0),
-            font=dict(size=24)
+            font=dict(size=20)
         ),
         geo=dict(
             scope="usa",
@@ -460,16 +464,16 @@ for i in cols_to_use:
         ),
         legend=dict(
             title_text="",
-            x=0.98,
-            xanchor="right",
-            y=0.25,
-            yanchor="middle",
+            orientation="h",
+            x=0.5,
+            xanchor="center",
+            y=0.02,
+            yanchor="bottom",
             bgcolor="rgba(255,255,255,0.75)",
-            font=dict(size=18)
+            font=dict(size=12)
         ),
-        margin=dict(l=0, r=0, t=0, b=0),
-        width=900,
-        height=450
+        margin=dict(l=0, r=0, t=30, b=30),
+        height=430
     )
 
     fig.show()
@@ -484,49 +488,144 @@ While the clusters seem to capture rural and urban differences, they also appear
 
 The difference-in-differences regression model results are mixed. Each outcome variable is built on four different models: in-county data centers in Cluster 0, nearby data centers in Cluster 0, in-county data centers in Cluster 1, and nearby data centers in Cluster 1. Many of our models violated the parallel trends assumption, meaning that in the five years leading up to the treatment year, there is at least one year in which the difference between the treatment and control groups is not constant. Additionally, there are a number of models where the parallel trends assumption is met, but there is no statistically significant trend in the years after treatment. However, there are a number of models that find significant trends, which indicate a relationship between the presence of data centers and economic outcomes.
 
+```{python}
+#| label: fig-did-effects
+#| fig-cap: "Estimated five-year difference-in-differences effects of data center exposure on county outcomes, by cluster and treatment type. Cells are colored by the direction of statistically significant effects from models that satisfy the parallel trends assumption. Red indicates a negative effect, blue indicates a positive effect, and light gray indicates no statistically interpretable effect, including nonsignificant estimates and models that violate the parallel trends assumption. In-county exposure is defined as crossing from two or fewer to three or more NAICS 518 establishments in the county. Nearby exposure is defined as crossing from 112 or fewer to 113 or more NAICS 518 establishments within a 50-mile radius. Full estimates and confidence intervals are reported in Appendix Table B.1."
 
-Table: Estimated Difference-in-Differences effects of data center presence on county economic and environmental outcomes, by cluster and treatment type, 5 years after crossing the specified threshold. {#tbl-did-effects}
+did_plot = pd.DataFrame([
+    ["Trade & Transport Employment", "Pct. change per capita", -0.337, "sig", None, "pt_fail", None, "pt_fail", None, "ns"],
+    ["Public Services Employment",   "Pct. change per capita", None,   "ns",  None, "pt_fail", None, "ns",      None, "pt_fail"],
+    ["Professional Employment",      "Pct. change per capita", None,   "ns",  None, "pt_fail", None, "pt_fail", None, "ns"],
+    ["Primary Industry Employment",  "Pct. change per capita", None,   "pt_fail", None, "ns", None, "pt_fail", -0.173, "sig"],
+    ["Information Employment",       "Pct. change per capita", None,   "pt_fail", None, "ns", None, "pt_fail", None, "ns"],
+    ["Industrial Employment",        "Pct. change per capita", -0.759, "sig", None, "ns", None, "pt_fail", None, "ns"],
+    ["Nearby mean daily PM2.5",      "μg/m³",                  -0.398, "sig", None, "pt_fail", None, "ns", None, "pt_fail"],
+    ["In-county mean daily PM2.5",   "μg/m³",                  -0.398, "sig", None, "pt_fail", None, "ns", None, "pt_fail"],
+    ["Real GDP",                     "Pct. change in $1,000 (2017) per capita", None, "ns", None, "pt_fail", None, "pt_fail", None, "ns"],
+    ["Single-family permits",        "Pct. change per 1,000 population", None, "pt_fail", 14.992, "sig", None, "ns", None, "pt_fail"],
+    ["Personal income",              "Pct. change in $1,000 per capita", -3.793, "sig", None, "pt_fail", None, "pt_fail", None, "pt_fail"],
+    ["Unemployment rate",            "Percent", None, "ns", -0.901, "sig", None, "ns", None, "pt_fail"]
+], columns=[
+    "outcome", "unit",
+    "c0_in", "c0_in_status",
+    "c0_near", "c0_near_status",
+    "c1_in", "c1_in_status",
+    "c1_near", "c1_near_status"
+])
 
-| Outcome | Cluster 0: In-County Data Centers (> 2) | Cluster 0: Nearby Data Centers (> 112) | Cluster 1: In-County Data Centers (> 2) | Cluster 1: Nearby Data Centers (> 112) |
-|---|---:|---:|---:|---:|
-| Trade & Transport Employment (% change per capita) | -0.337<br><span style="font-size: 0.85em;">(-0.579, -0.097)</span> | No Effect<sup>2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
-| Public Services Employment (% change per capita) | No Effect<sup>1</sup> | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> |
-| Professional Employment (% change per capita) | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
-| Primary Industry Employment (% change per capita) | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>2</sup> | -0.173<br><span style="font-size: 0.85em;">(-0.308, -0.038)</span> |
-| Information Employment (% change per capita) | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
-| Industrial Employment (% change per capita) | -0.759<br><span style="font-size: 0.85em;">(-1.097, -0.421)</span> | No Effect<sup>1</sup> | No Effect<sup>2</sup> | No Effect<sup>1</sup> |
-| Nearby mean daily PM2.5 | -0.398<br><span style="font-size: 0.85em;">(-0.662, -0.133)</span> | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>2</sup> |
-| In-County mean daily PM2.5 | -0.398<br><span style="font-size: 0.85em;">(-0.681, -0.115)</span> | No Effect<sup>2</sup> | No Effect<sup>1</sup> | No Effect<sup>2</sup> |
-| Real GDP (% change in $1000 2017 dollars per capita) | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1</sup> |
-| Single Family Permits (% change per 1,000 population) | No Effect<sup>1, 2</sup> | 14.992<br><span style="font-size: 0.85em;">(7.077, 22.907)</span> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> |
-| Personal Income (% change in $1000 per capita) | -3.793<br><span style="font-size: 0.85em;">(-5.480, -2.096)</span> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> | No Effect<sup>1, 2</sup> |
-| Unemployment Rate (%) | No Effect<sup>1</sup> | -0.901<br><span style="font-size: 0.85em;">(-1.221, -0.581)</span> | No Effect<sup>1</sup> | No Effect<sup>1, 2</sup> |
+row_labels = [
+    f"{row.outcome}\n({row.unit})"
+    for _, row in did_plot.iterrows()
+]
 
-<div class="table-notes">
+plot_cols = ["c0_in", "c0_near", "c1_in", "c1_near"]
+status_cols = ["c0_in_status", "c0_near_status", "c1_in_status", "c1_near_status"]
 
-<sup>1</sup> Result is not statistically significant.  
-<sup>2</sup> Model violates the parallel trends assumption.
+display_matrix = np.zeros((len(did_plot), len(plot_cols)))
+text_matrix = [["" for _ in plot_cols] for _ in range(len(did_plot))]
 
-</div>
+for i in range(len(did_plot)):
+    for j, (coef_col, status_col) in enumerate(zip(plot_cols, status_cols)):
+        coef = did_plot.loc[i, coef_col]
+        status = did_plot.loc[i, status_col]
 
-@tbl-did-effects shows that a majority of the models run do not have a significant effect, but some models (particularly in Cluster 0) do have an effect. We find that for Cluster 0, getting three or more data centers is associated with a decrease in per-capita trade & transport employment, industrial employment, in-county and nearby air pollutants, and personal income. Additionally, for Cluster 0, getting 113 or more data centers in a 50-mile radius around the county is associated with an increase in single-family permits and a decrease in the unemployment rate. The only significant outcome for Cluster 1 is a decrease in primary industry employment when the 113 nearby data center threshold is crossed.
+        if status == "sig" and pd.notna(coef):
+            display_matrix[i, j] = 1 if coef > 0 else -1
+            text_matrix[i][j] = f"{coef:.2f}"
+
+fig, ax = plt.subplots(figsize=(7.6, 7.2))
+
+cmap = ListedColormap([
+    "#b55d4c",  # muted red
+    "#e9ecef",  # light gray
+    "#5b84b1"   # muted blue
+])
+norm = BoundaryNorm([-1.5, -0.5, 0.5, 1.5], cmap.N)
+
+ax.imshow(display_matrix, cmap=cmap, norm=norm, aspect="auto", interpolation="none")
+
+ax.set_xticks(range(4))
+ax.set_xticklabels([
+    "Cluster 0\nIn-county",
+    "Cluster 0\nNearby",
+    "Cluster 1\nIn-county",
+    "Cluster 1\nNearby"
+], fontsize=9.5)
+
+ax.xaxis.tick_top()
+ax.tick_params(axis="x", top=True, labeltop=True, bottom=False, labelbottom=False, length=0, pad=6)
+ax.tick_params(axis="y", length=0, pad=4)
+
+ax.set_yticks(range(len(row_labels)))
+ax.set_yticklabels(row_labels, fontsize=8.2)
+
+for i in range(len(did_plot)):
+    for j in range(len(plot_cols)):
+        label = text_matrix[i][j]
+        if label:
+            ax.text(j, i, label, ha="center", va="center", fontsize=8.8, color="black")
+
+for spine in ax.spines.values():
+    spine.set_visible(False)
+
+ax.grid(False)
+
+n_rows, n_cols = display_matrix.shape
+for x in np.arange(-0.5, n_cols, 1):
+    ax.vlines(x, -0.5, n_rows - 0.5, colors="white", linewidth=1.2)
+ax.vlines(n_cols - 0.5, -0.5, n_rows - 0.5, colors="white", linewidth=1.2)
+
+for y in np.arange(-0.5, n_rows, 1):
+    ax.hlines(y, -0.5, n_cols - 0.5, colors="white", linewidth=1.2)
+ax.hlines(n_rows - 0.5, -0.5, n_cols - 0.5, colors="white", linewidth=1.2)
+
+ax.set_title(
+    "Estimated DiD Effects 5 Years After Treatment Threshold",
+    fontsize=11.5,
+    pad=16,
+    weight="bold"
+)
+
+plt.tight_layout()
+plt.show()
+```
 
 
 ```{python}
 #| label: fig-diff-in-diff-examples
-#| fig-cap: "Event-study estimates of data center impacts on local outcomes."
-#| fig-width: 12
-#| fig-height: 9
-#| out-width: 100%
-fig, axes = plt.subplots(3, 2, figsize=(12, 9), sharex=True)
+#| fig-cap: "Event-study estimates of data center impacts on local outcomes, by county cluster. Points show estimated effects and vertical bars show confidence intervals; year 0 denotes treatment onset."
+#| fig-width: 8
+#| fig-height: 7.2
+#| out-width: 82%
+#| fig-align: center
+
+fig, axes = plt.subplots(3, 2, figsize=(8, 7.2), sharex=True)
 axes = axes.reshape(3, 2)
+
+fig.subplots_adjust(
+    top=0.88,
+    bottom=0.09,
+    left=0.11,
+    right=0.97,
+    hspace=0.48,
+    wspace=0.24
+)
 
 cluster_colors = {0: "#C67A6D", 1: "#5B8FA8"}
 
-fig.subplots_adjust(top=0.90)
+fig.text(
+    0.28, 0.965, "Cluster 0 (More Rural)",
+    ha="center", va="top",
+    fontsize=14, fontweight="bold",
+    color=cluster_colors[0]
+)
 
-fig.text(0.28, 0.98, "Cluster 0 (More Rural)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[0])
-fig.text(0.72, 0.98, "Cluster 1 (More Urban)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[1])
+fig.text(
+    0.76, 0.965, "Cluster 1 (More Urban)",
+    ha="center", va="top",
+    fontsize=14, fontweight="bold",
+    color=cluster_colors[1]
+)
 
 outcomes = [
     ("personal_income_thousands_of_dollars_per_capita_log", "Log Personal Income", "first_dc_year"),
@@ -577,14 +676,20 @@ for row, (outcome, clean_name, first_treat) in enumerate(outcomes):
         ax.set_ylim(y_min, y_max)
 
         if col == 0:
-            ax.set_ylabel("Effect")
+            ax.set_ylabel("Effect", fontsize=10)
         else:
             ax.set_ylabel("")
 
         if row == 2:
-            ax.set_xlabel("Relative Year")
+            ax.set_xlabel("Relative year", fontsize=10)
 
-        ax.set_title(f"{clean_name} ({'Nearby Datacenters' if first_treat == 'above_val_nearby_year' else 'In-County Datacenters'})", fontsize = 14)
+        ax.tick_params(axis="both", labelsize=8)
+        
+        ax.set_title(
+            f"{clean_name} ({'Nearby Data Centers' if first_treat == 'above_val_nearby_year' else 'In-County Data Centers'})",
+            fontsize=10,
+            pad=5
+        )
 
 plt.show()
 ```
