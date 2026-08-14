@@ -21,6 +21,11 @@ import json
 import urllib.request
 import plotly.graph_objects as go
 import utils.map_utils as mu
+import geopandas as gpd
+from matplotlib.patches import Patch
+from shapely import affinity
+from matplotlib.lines import Line2D
+
 import importlib
 importlib.reload(mu)
 
@@ -36,6 +41,8 @@ con.execute(f"ATTACH '{database_url}' AS my_db (TYPE postgres, READ_ONLY);")
 df = con.execute("SELECT * FROM my_db.transformed.naics_518_establishments").df()
 df_nearby = con.execute("SELECT * FROM my_db.transformed.naics_518_nearby_estabs_50mi").df()
 cols = df.columns
+
+df_county = con.execute("SELECT * FROM my_db.public.us_counties").df()
 ```
 
 ```{python}
@@ -43,6 +50,339 @@ cols = df.columns
 df = df[(df["year"] > 2006) & (df["year"] < 2023)].reset_index(drop=True)
 
 df.loc[:, "estabs_log"] = np.log1p(df["estabs"])
+```
+
+## Spatial Exposure Construction
+
+```{python}
+# Set variables
+BUFFER_MILES = 50
+BUFFER_METERS = BUFFER_MILES * 1609.344
+SQM_PER_SQMI = 2_589_988.110336
+
+gray_fill = "#d9d9d9"
+gray_edge = "#9e9e9e"
+county_fill = "#2f5d8a"
+county_edge = "#17324d"
+buffer_fill = "#f4a261"
+buffer_edge = "#d97706"
+overlap_fill = "#f28e2b"
+overlap_edge = "#b45309"
+
+# Create buffer df
+geojson_path = data_dir / "county_fips_codes" / "geojson_counties_fips.json"
+counties_geo = gpd.read_file(geojson_path)
+counties_geo["id"] = counties_geo["id"].replace({"46113": "46102"})
+counties_geo = counties_geo[["id", "geometry"]].copy()
+counties_geo = counties_geo.rename(columns={"id": "county_id"})
+counties_geo["county_id"] = counties_geo["county_id"].astype(str)
+
+counties_final = df_county.merge(counties_geo, on="county_id", how="left")
+counties_final = gpd.GeoDataFrame(counties_final, geometry="geometry", crs="EPSG:4326").to_crs(5070)
+counties_final["geometry"] = counties_final.geometry.make_valid()
+
+counties_final["geom_area_sqmi"] = counties_final.geometry.area / SQM_PER_SQMI
+counties_final["total_area_sqmi"] = counties_final["land_area_sqmi"] + counties_final["water_area_sqmi"]
+counties_final["land_share"] = counties_final["land_area_sqmi"] / counties_final["total_area_sqmi"]
+
+# Create mulnomah-specific buffer
+multnomah = counties_final[counties_final["county_id"] == "41051"].copy()
+
+buffers = multnomah[["county_id", "geometry"]].copy()
+buffers["geometry"] = buffers.geometry.buffer(BUFFER_METERS)
+buffers = buffers.rename(columns={"county_id": "target_county_id"})
+
+# Identify counties that intersect Multnomah County's 50-mile buffer
+candidate_pairs = gpd.sjoin(
+    buffers,
+    counties_final[["county_id", "geometry"]],
+    how="inner",
+    predicate="intersects"
+)
+
+candidate_pairs = candidate_pairs.rename(
+    columns={"county_id": "neighbor_county_id"}
+)
+
+candidate_pairs = candidate_pairs[
+    candidate_pairs["target_county_id"] != candidate_pairs["neighbor_county_id"]
+].copy()
+
+candidate_pairs = candidate_pairs[
+    ["target_county_id", "neighbor_county_id"]
+].drop_duplicates()
+
+
+# Attach the buffer geometry and neighboring county geometry
+buffer_geom = buffers.rename(
+    columns={"geometry": "buffer_geometry"}
+)
+
+neighbor_geom = counties_final[
+    ["county_id", "geometry", "land_share", "geom_area_sqmi"]
+].rename(
+    columns={
+        "county_id": "neighbor_county_id",
+        "geometry": "neighbor_geometry",
+        "land_share": "neighbor_land_share",
+        "geom_area_sqmi": "neighbor_geom_area_sqmi"
+    }
+)
+
+overlap = (
+    candidate_pairs
+    .merge(buffer_geom, on="target_county_id", how="left")
+    .merge(neighbor_geom, on="neighbor_county_id", how="left")
+)
+
+buffer_series = gpd.GeoSeries(overlap["buffer_geometry"], crs=counties_final.crs)
+neighbor_series = gpd.GeoSeries(overlap["neighbor_geometry"], crs=counties_final.crs)
+intersection_geom = buffer_series.intersection(neighbor_series, align=False)
+
+overlap = gpd.GeoDataFrame(overlap, geometry=intersection_geom, crs=counties_final.crs)
+overlap = overlap[overlap.geometry.notna() & ~overlap.geometry.is_empty].copy()
+```
+
+```{python}
+#| label: fig-50-mile-buffer
+#| fig-cap: "This figure shows the 50-mile buffer surrounding Multnomah County and the portions of neighboring counties that fall within that buffer. Counties outlined in dark orange intersect the buffer and therefore contribute to the area-weighted measure of nearby data-center establishments; counties and state boundaries are included for geographic context. Map orientation has been rotated for visual clarity."
+#| fig-width: 7.2
+#| fig-height: 8.0
+#| out-width: 88%
+#| fig-align: center
+oregon = counties_final[counties_final["state"] == "OR"].copy()
+washington = counties_final[counties_final["state"] == "WA"].copy()
+
+
+base_map = pd.concat([oregon, washington], ignore_index=True)
+base_map = gpd.GeoDataFrame(
+    base_map,
+    geometry="geometry",
+    crs=counties_final.crs
+)
+
+
+state_boundaries = (
+    base_map[["state", "geometry"]]
+    .dissolve(by="state")
+    .reset_index()
+)
+
+
+buffer_union = buffers.geometry.iloc[0]
+minx, miny, maxx, maxy = buffer_union.bounds
+
+
+# Rotate the map display so the Pacific coastline appears approximately vertical.
+rotation_angle = 10
+rotation_origin = buffer_union.centroid
+
+def rotate_gdf(gdf, angle, origin):
+    rotated = gdf.copy()
+    rotated["geometry"] = rotated.geometry.apply(
+        lambda geom: affinity.rotate(
+            geom,
+            angle,
+            origin=origin,
+            use_radians=False
+        )
+    )
+    return rotated
+
+
+base_map_plot = rotate_gdf(base_map, rotation_angle, rotation_origin)
+buffers_plot = rotate_gdf(buffers, rotation_angle, rotation_origin)
+overlap_plot = rotate_gdf(overlap, rotation_angle, rotation_origin)
+multnomah_plot = rotate_gdf(multnomah, rotation_angle, rotation_origin)
+state_boundaries_plot = rotate_gdf(
+    state_boundaries,
+    rotation_angle,
+    rotation_origin
+)
+
+
+# Highlight boundaries
+nearby_outline = counties_final[
+    counties_final["county_id"].isin(
+        overlap["neighbor_county_id"].unique()
+    )
+]
+nearby_outline_plot = rotate_gdf(
+    nearby_outline,
+    rotation_angle,
+    rotation_origin
+)
+
+
+rotated_buffer = buffers_plot.geometry.iloc[0]
+minx, miny, maxx, maxy = rotated_buffer.bounds
+
+pad_x = (maxx - minx) * 0.30
+pad_y = (maxy - miny) * 0.62
+
+
+fig, ax = plt.subplots(figsize=(7.2, 8.0))
+
+
+# counties
+base_map_plot.plot(
+    ax=ax,
+    color=gray_fill,
+    edgecolor=gray_edge,
+    linewidth=0.55,
+    alpha=0.45
+)
+
+
+# buffer
+buffers_plot.plot(
+    ax=ax,
+    color=buffer_fill,
+    edgecolor=buffer_edge,
+    linewidth=1.2,
+    alpha=0.18
+)
+
+
+# Portions of neighboring counties inside the buffer
+overlap_plot.plot(
+    ax=ax,
+    color=overlap_fill,
+    edgecolor=overlap_edge,
+    linewidth=0.8,
+    alpha=0.65
+)
+
+
+# Target county
+multnomah_plot.plot(
+    ax=ax,
+    color=county_fill,
+    edgecolor=county_edge,
+    linewidth=1.8,
+    alpha=0.95
+)
+
+
+# Highlight boundaries
+nearby_outline_plot.boundary.plot(
+    ax=ax,
+    color=overlap_edge,
+    linewidth=1.1,
+    alpha=0.95
+)
+
+
+# Add state borders over county boundaries
+state_boundaries_plot.boundary.plot(
+    ax=ax,
+    color="#4a4a4a",
+    linewidth=1.5,
+    alpha=0.95,
+    zorder=10
+)
+
+# Add state labels
+state_labels = state_boundaries_plot.copy()
+state_labels["label_point"] = state_labels.representative_point()
+
+label_map = {
+    "OR": "Oregon (OR)",
+    "WA": "Washington (WA)"
+}
+
+for _, row in state_labels.iterrows():
+    x = row["label_point"].x
+    y = row["label_point"].y
+
+    # Small manual nudges to keep labels out of the main figure area
+    if row["state"] == "OR":
+        x -= 90000
+        y -= 20000
+    elif row["state"] == "WA":
+        x -= 150000
+        y += 5000
+
+    ax.text(
+        x,
+        y,
+        label_map[row["state"]],
+        fontsize=10,
+        color="#4a4a4a",
+        ha="center",
+        va="center",
+        fontweight="semibold",
+        bbox=dict(
+            facecolor="white",
+            edgecolor="none",
+            alpha=0.75,
+            pad=1.5
+        ),
+        zorder=20
+    )
+
+
+ax.set_xlim(minx - pad_x, maxx + pad_x)
+ax.set_ylim(miny - pad_y, maxy + pad_y)
+ax.set_aspect("equal")
+
+
+ax.set_axis_off()
+
+
+ax.set_title(
+    "Example of the 50-mile county buffer around Multnomah County, Oregon",
+    fontsize=14,
+    pad=14
+)
+
+
+legend_handles = [
+    Patch(
+        facecolor=county_fill,
+        edgecolor=county_edge,
+        label="Multnomah County"
+    ),
+    Patch(
+        facecolor=overlap_fill,
+        edgecolor=overlap_edge,
+        alpha=0.65,
+        label="Portion of nearby counties inside buffer"
+    ),
+    Patch(
+        facecolor=gray_fill,
+        edgecolor=gray_edge,
+        alpha=0.45,
+        label="Other county areas shown for context"
+    ),
+    Line2D(
+        [0],
+        [0],
+        color=overlap_edge,
+        linewidth=1.4,
+        label="County intersects 50-mile buffer"
+    ),
+    Line2D(
+        [0],
+        [0],
+        color="#4a4a4a",
+        linewidth=1.5,
+        label="State boundary"
+    )
+]
+
+
+ax.legend(
+    handles=legend_handles,
+    loc="lower left",
+    frameon=True,
+    framealpha=0.95,
+    fontsize=9
+)
+
+
+fig.tight_layout()
+plt.show()
 ```
 
 ## Statistical Approach
@@ -73,7 +413,7 @@ The failure of the temporal split highlights the fact that data center deploymen
 
 ```{python}
 #| label: fig-estabs-over-time
-#| fig-cap: "**National Total NAICS 518 Establishments (2007–2022)**. Annual count of U.S. computing infrastructure, data processing, and web hosting establishments. Dashed vertical lines denote key technological inflection points, including the onset of rapid sector expansion around 2013 and the release of GPT-3 in 2020."
+#| fig-cap: "Annual count of U.S. computing infrastructure, data processing, and web hosting establishments. Dashed vertical lines denote key technological inflection points, including the onset of rapid sector expansion around 2013 and the release of GPT-3 in 2020."
 national_total_by_year = df[["year", "estabs"]]
 national_total_by_year = national_total_by_year.groupby('year').sum().reset_index()
 

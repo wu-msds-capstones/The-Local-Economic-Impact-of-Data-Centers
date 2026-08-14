@@ -1,6 +1,6 @@
 ---
 title: "The-Local-Economic-Impact-of-Data-Centers"
-subtitle: County-level measures in the contiguous United States
+subtitle: "County-level measures in the contiguous United States"
 authors:
   - Ian Walsh
   - Logan Rosell
@@ -8,11 +8,7 @@ bibliography: references.bib
 csl: styles/nature-brackets.csl
 citeproc: true
 title-block-banner: true
-format: 
-  html:
-    theme:
-      light: lightly
-      dark: darkly
+format: html
 ---
 
 {{< include _01_intro.qmd >}}

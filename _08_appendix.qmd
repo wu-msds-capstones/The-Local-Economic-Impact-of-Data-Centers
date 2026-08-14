@@ -1,6 +1,8 @@
 # Appendix
 
-Table A.1: Data sources used in the analysis.
+## Appendix A: Data Sources
+
+### Table A.1: Data sources used in the analysis.
 
 | Source Name | Specific Dataset Name | Purpose | Link |
 |---|---|---|---|
@@ -17,3 +19,7 @@ Table A.1: Data sources used in the analysis.
 | US Census | 2022 NAICS | Defines what each NAICS code means and when that definition was last updated. | [Link](https://www.census.gov/naics/?58967?yearbck=2022) |
 | US Census | Download the National Counties Gazetteer File | Provides information on county land and water area. | [Link](https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html) |
 | US Bureau of Labor Statistics | Quarterly Census of Employment and Wages | Provides a count of businesses that meet the NAICS 518 definition for data centers. | [Link](https://www.bls.gov/cew/downloadable-data-files.htm) |
+
+### Business Patterns Fields
+
+For readability, @ref(fig-erd-schema) displays only the primary identifiers and aggregate measures in the `business_patterns` table. The underlying table also retains establishment-count fields by employment-size category: `est_lt_5`, `est5_9`, `est10_19`, `est20_49`, `est50_99`, `est100_249`, `est250_499`, `est500_999`, `est_gt_1000`, `est1000_1500`, `est1500_2500`, `est2500_5000`, and `est_gt_5000`.

@@ -394,6 +394,9 @@ with open(geojson_path, "r") as f:
 ```{python}
 #| label: fig-cluster-map
 #| fig-cap: "Map of U.S. counties grouped into two clusters based on non-treatment county characteristics, illustrating the rural-urban split used in subsequent analysis."
+#| out-width: 100%
+#| fig-align: center
+#| 
 combined_df = pd.concat(
     [
         cluster_0_df[["county_id"]].assign(cluster=0),
@@ -402,7 +405,7 @@ combined_df = pd.concat(
     ignore_index=True,
 )
 
-eda_table_name = "Counties Colored By Cluster"
+eda_table_name = "Contiguous U.S. counties by cluster assignment"
 cols_to_use = ["cluster"]
 
 cluster_labels = {
@@ -445,7 +448,7 @@ for i in cols_to_use:
             y=0.98,
             yanchor="top",
             pad=dict(t=0, b=0),
-            font=dict(size=24)
+            font=dict(size=20)
         ),
         geo=dict(
             scope="usa",
@@ -460,16 +463,16 @@ for i in cols_to_use:
         ),
         legend=dict(
             title_text="",
-            x=0.98,
-            xanchor="right",
-            y=0.25,
-            yanchor="middle",
+            orientation="h",
+            x=0.5,
+            xanchor="center",
+            y=0.02,
+            yanchor="bottom",
             bgcolor="rgba(255,255,255,0.75)",
-            font=dict(size=18)
+            font=dict(size=12)
         ),
-        margin=dict(l=0, r=0, t=0, b=0),
-        width=900,
-        height=450
+        margin=dict(l=0, r=0, t=30, b=30),
+        height=430
     )
 
     fig.show()
@@ -514,19 +517,39 @@ Table: Estimated Difference-in-Differences effects of data center presence on co
 
 ```{python}
 #| label: fig-diff-in-diff-examples
-#| fig-cap: "Event-study estimates of data center impacts on local outcomes."
-#| fig-width: 12
-#| fig-height: 9
-#| out-width: 100%
-fig, axes = plt.subplots(3, 2, figsize=(12, 9), sharex=True)
+#| fig-cap: "Event-study estimates of data center impacts on local outcomes, by county cluster. Points show estimated effects and vertical bars show confidence intervals; year 0 denotes treatment onset."
+#| fig-width: 8
+#| fig-height: 7.2
+#| out-width: 82%
+#| fig-align: center
+
+fig, axes = plt.subplots(3, 2, figsize=(8, 7.2), sharex=True)
 axes = axes.reshape(3, 2)
+
+fig.subplots_adjust(
+    top=0.88,
+    bottom=0.09,
+    left=0.11,
+    right=0.97,
+    hspace=0.48,
+    wspace=0.24
+)
 
 cluster_colors = {0: "#C67A6D", 1: "#5B8FA8"}
 
-fig.subplots_adjust(top=0.90)
+fig.text(
+    0.28, 0.965, "Cluster 0 (More Rural)",
+    ha="center", va="top",
+    fontsize=14, fontweight="bold",
+    color=cluster_colors[0]
+)
 
-fig.text(0.28, 0.98, "Cluster 0 (More Rural)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[0])
-fig.text(0.72, 0.98, "Cluster 1 (More Urban)", ha="center", va="top", fontsize=20, fontweight="bold", color = cluster_colors[1])
+fig.text(
+    0.76, 0.965, "Cluster 1 (More Urban)",
+    ha="center", va="top",
+    fontsize=14, fontweight="bold",
+    color=cluster_colors[1]
+)
 
 outcomes = [
     ("personal_income_thousands_of_dollars_per_capita_log", "Log Personal Income", "first_dc_year"),
@@ -577,14 +600,20 @@ for row, (outcome, clean_name, first_treat) in enumerate(outcomes):
         ax.set_ylim(y_min, y_max)
 
         if col == 0:
-            ax.set_ylabel("Effect")
+            ax.set_ylabel("Effect", fontsize=10)
         else:
             ax.set_ylabel("")
 
         if row == 2:
-            ax.set_xlabel("Relative Year")
+            ax.set_xlabel("Relative year", fontsize=10)
 
-        ax.set_title(f"{clean_name} ({'Nearby Datacenters' if first_treat == 'above_val_nearby_year' else 'In-County Datacenters'})", fontsize = 14)
+        ax.tick_params(axis="both", labelsize=8)
+        
+        ax.set_title(
+            f"{clean_name} ({'Nearby Data Centers' if first_treat == 'above_val_nearby_year' else 'In-County Data Centers'})",
+            fontsize=10,
+            pad=5
+        )
 
 plt.show()
 ```
