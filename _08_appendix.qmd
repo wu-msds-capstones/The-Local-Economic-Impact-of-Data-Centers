@@ -9,7 +9,7 @@
 | Plotly Sample Datasets GitHub Repository | geojson-counties-fips.json | Geographic data describing the borders of U.S. counties, used for mapping plots. | [Link](https://github.com/plotly/datasets/blob/master/geojson-counties-fips.json) |
 | California Health and Human Services Geoportal | US County Reference Data | Provides the geographic center of each county, allowing for distance calculations between counties. | [Link](https://gis.data.chhs.ca.gov/) |
 | US Census | County and County Equivalent Entities | List of FIPS county codes used to join data sources together. | [Link](https://www.census.gov/library/reference/code-lists/ansi.html#cou) |
-| Centers for Disease Control | Daily County-Level PM2.5 Concentrations 2001–2022 | Provides historical county-level PM2.5 air pollution estimates. | [Link](https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data) |
+| Centers for Disease Control | Daily County-Level $\text{PM}_{2.5}$ Concentrations 2001–2022 | Provides historical county-level $\text{PM}_{2.5}$ air pollution estimates. | [Link](https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data) |
 | Bureau of Economic Analysis | Personal Income by County | Historical county-level data on average personal income. | [Link](https://www.bea.gov/data/income-saving/personal-income-by-county) |
 | US Census | County Business Patterns | County-level historical statistics on business count and employment levels. | [Link](https://www.census.gov/programs-surveys/cbp.html) |
 | Bureau of Economic Analysis | GDP by County | Historical county-level data on GDP output. | [Link](https://www.bea.gov/data/gdp/gdp-by-county) |
@@ -36,8 +36,8 @@ For readability, @fig-erd-schema displays only the primary identifiers and aggre
 | Primary Industry Employment | % change per capita | No effect² | No effect¹ | No effect² | -0.173<br><span style="font-size: 0.85em; color: #6c757d;">(−0.308, −0.038)</span> |
 | Information Employment | % change per capita | No effect¹² | No effect¹ | No effect¹² | No effect¹ |
 | Industrial Employment | % change per capita | -0.759<br><span style="font-size: 0.85em; color: #6c757d;">(−1.097, −0.421)</span> | No effect¹ | No effect² | No effect¹ |
-| Nearby mean daily PM2.5 | μg/m³ | -0.398<br><span style="font-size: 0.85em; color: #6c757d;">(−0.662, −0.133)</span> | No effect² | No effect¹ | No effect² |
-| In-county mean daily PM2.5 | μg/m³ | -0.398<br><span style="font-size: 0.85em; color: #6c757d;">(−0.681, −0.115)</span> | No effect² | No effect¹ | No effect² |
+| Nearby mean daily $\text{PM}_{2.5}$ | μg/m³ | -0.398<br><span style="font-size: 0.85em; color: #6c757d;">(−0.662, −0.133)</span> | No effect² | No effect¹ | No effect² |
+| In-county mean daily $\text{PM}_{2.5}$ | μg/m³ | -0.398<br><span style="font-size: 0.85em; color: #6c757d;">(−0.681, −0.115)</span> | No effect² | No effect¹ | No effect² |
 | Real GDP | % change in $1,000 2017 dollars per capita | No effect¹ | No effect¹² | No effect¹² | No effect¹ |
 | Single-family permits | % change per 1,000 population | No effect¹² | 14.992<br><span style="font-size: 0.85em; color: #6c757d;">(7.077, 22.907)</span> | No effect¹ | No effect¹² |
 | Personal income | % change in $1,000 per capita | -3.793<br><span style="font-size: 0.85em; color: #6c757d;">(−5.480, −2.096)</span> | No effect¹² | No effect¹² | No effect¹² |

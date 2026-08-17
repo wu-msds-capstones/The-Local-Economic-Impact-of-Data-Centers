@@ -22,6 +22,7 @@ seaborn
 plotly
 skimpy
 kaleido
+graphviz
 
 # Environment & Configuration
 python-dotenv
