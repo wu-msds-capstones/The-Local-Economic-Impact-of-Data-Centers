@@ -694,7 +694,7 @@ for row, (outcome, clean_name, first_treat) in enumerate(outcomes):
 plt.show()
 ```
 
-@fig-diff-in-diff-examples displays the more apparent trends found in our models. It shows that data center additions in a county affect log personal income and PM2.5 levels over time; it also shows that the addition of nearby data centers affects unemployment over time. Results are statistically significant in Cluster 0, while Cluster 1 shows no significant effects.
+@fig-diff-in-diff-examples displays the more apparent trends found in our models. It shows that data center additions in a county affect log personal income and $\text{PM}_{2.5}$ levels over time; it also shows that the addition of nearby data centers affects unemployment over time. Results are statistically significant in Cluster 0, while Cluster 1 shows no significant effects.
 
 ## Variational Autoencoder
 
