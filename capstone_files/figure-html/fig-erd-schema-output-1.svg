@@ -565,13 +565,13 @@
 <!-- naics_code_look_up&#45;&gt;business_patterns -->
 <g id="edge33" class="edge">
 <title>naics_code_look_up-&gt;business_patterns</title>
-<path fill="none" stroke="#64748b" stroke-width="0.9" d="M241.75,-109C244.92,-109 248.15,-109 251.41,-109"/>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M241.75,-87C244.92,-87 248.15,-87 251.41,-87"/>
 </g>
 <!-- county_distances_lookup&#45;&gt;naics_518_nearby_estabs_50mi -->
 <!-- county_distances_lookup&#45;&gt;naics_518_nearby_estabs_50mi -->
 <g id="edge35" class="edge">
 <title>county_distances_lookup-&gt;naics_518_nearby_estabs_50mi</title>
-<path fill="none" stroke="#64748b" stroke-width="0.9" d="M540.33,-218.6C540.33,-210.93 540.33,-203.13 540.33,-195.38"/>
+<path fill="none" stroke="#64748b" stroke-width="0.9" d="M502.42,-218.6C502.42,-210.93 502.42,-203.13 502.42,-195.38"/>
 </g>
 <!-- C1&#45;&gt;personal_income -->
 <!-- C1&#45;&gt;C2 -->
