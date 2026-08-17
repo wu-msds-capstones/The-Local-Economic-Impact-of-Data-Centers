@@ -9,6 +9,7 @@ manuscript:
 
 format:
   html:
+    embed-resources: true
     theme:
       light: lightly
       dark: darkly
