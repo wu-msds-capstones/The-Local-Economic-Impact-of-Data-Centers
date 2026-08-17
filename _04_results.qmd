@@ -696,7 +696,7 @@ plt.show()
 
 @fig-diff-in-diff-examples displays the more apparent trends found in our models. It shows that data center additions in a county affect log personal income and $\text{PM}_{2.5}$ levels over time; it also shows that the addition of nearby data centers affects unemployment over time. Results are statistically significant in Cluster 0, while Cluster 1 shows no significant effects.
 
-## Variational Autoencoder
+## Conditional Variational Autoencoder
 
 The variational autoencoder neural network that we trained did not produce meaningfully interpretable results. While increasing the data center tier in the latent space for an existing county-year profile did alter the other predicted features, the outputs should be interpreted cautiously rather than as reliable counterfactual estimates.
 
