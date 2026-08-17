@@ -700,7 +700,7 @@ plt.show()
 
 The variational autoencoder neural network that we trained did not produce meaningfully interpretable results. While increasing the data center tier in the latent space for an existing county-year profile did alter the other predicted features, the outputs should be interpreted cautiously rather than as reliable counterfactual estimates.
 
-Table: Top predicted changes from the VAE counterfactual for Cluster 0 counties after a +2 data center tier shift. {#tbl-vae-cluster0}
+Table: Top predicted changes from the CVAE counterfactual for Cluster 0 counties after a +2 data center tier shift. {#tbl-vae-cluster0}
 
 | Feature | Predicted change |
 |---|---:|
@@ -730,7 +730,7 @@ Table: Top predicted changes from the VAE counterfactual for Cluster 0 counties 
 | real_gdp_2017_dollars_thousands_per_capita_log | 0.259 |
 | pm25_max_daily_avg | 0.227 |
 
-Table: Top predicted changes from the VAE counterfactual for Cluster 1 counties after a +2 data center tier shift. {#tbl-vae-cluster1}
+Table: Top predicted changes from the CVAE counterfactual for Cluster 1 counties after a +2 data center tier shift. {#tbl-vae-cluster1}
 
 | Feature | Predicted change |
 |---|---:|
