@@ -11,6 +11,7 @@ title-block-banner: true
 format: html
 ---
 
+{{< include _00_abstract.qmd >}}
 {{< include _01_intro.qmd >}}
 {{< include _02_background.qmd >}}
 {{< include _03_methods.qmd >}}
